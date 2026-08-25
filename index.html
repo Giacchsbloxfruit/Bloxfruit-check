@@ -2,140 +2,364 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Blox Fruits Live Account Checker</title>
+
     <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background: #0b0f19; color: #f3f4f6; padding: 40px; }
-
-        h2 { text-align: center; margin-bottom: 30px; color: #38bdf8; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px rgba(56,189,248,0.4); }
-
-        .table-container { background: #111827; border-radius: 12px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.6); border: 1px solid #1f2937; overflow-x: auto; }
-
-        table { width: 100%; border-collapse: collapse; text-align: left; }
-        th, td { padding: 14px 18px; border-bottom: 1px solid #1f2937; }
-        th { background: #1f2937; color: #9ca3af; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
-
-        tr:hover { background: #1a2234; transition: 0.2s ease; }
-
-        .badge-yes { color: #4ade80; font-weight: bold; }
-        .badge-no { color: #f87171; opacity: 0.5; }
-
-        /* HIỆU ỨNG DROPDOWN HOVER ĐÈ LÊN BẢNG */
-        .dropdown-cell { position: relative; display: inline-block; cursor: pointer; }
-        .dropdown-btn { background: #1f2937; padding: 6px 12px; border-radius: 6px; border: 1px solid #374151; font-size: 13px; color: #38bdf8; display: flex; align-items: center; gap: 8px; transition: 0.2s; }
-        .dropdown-btn:hover { background: #374151; color: #bae6fd; }
-        
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            z-index: 999; /* Ép nổi đè lên các hàng bên dưới */
-            min-width: 170px;
-            background: #111827;
-            border: 1px solid #374151;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            padding: 8px;
-            margin-top: 5px;
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        .dropdown-cell:hover .dropdown-menu { display: block; animation: dropdownFade 0.2s ease-in-out; }
-
-        .dropdown-item { padding: 6px 10px; font-size: 13px; color: #d1d5db; border-bottom: 1px solid #1f2937; }
-        .dropdown-item:last-child { border-bottom: none; }
-
-        @keyframes dropdownFade {
-            from { opacity: 0; transform: translateY(-5px); }
-            to { opacity: 1; transform: translateY(0); }
+        :root {
+            --bg: #060912;
+            --card: rgba(15, 23, 42, 0.82);
+            --card2: rgba(17, 24, 39, 0.92);
+            --border: rgba(56, 189, 248, 0.13);
+            --blue: #38bdf8;
+            --blue2: #0ea5e9;
+            --purple: #8b5cf6;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --green: #4ade80;
+            --red: #f87171;
         }
-    </style>
-</head>
-<body>
 
-    <h2>⚡ Live Account Checker - Blox Fruits ⚡</h2>
+        html {
+            scroll-behavior: smooth;
+        }
 
-    <div class="table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>Tên Tài Khoản</th>
-                    <th>Mũ Valkyrie</th>
-                    <th>Mảnh Gương</th>
-                    <th>Haki Màu (Skin)</th>
-                    <th>Trái Ác Quỷ</th>
-                </tr>
-            </thead>
-            <tbody id="accTableBody">
-                <tr><td colspan="5" style="text-align: center; color: #9ca3af;">Đang tải dữ liệu từ Firebase...</td></tr>
-            </tbody>
-        </table>
-    </div>
+        body {
+            min-height: 100vh;
+            color: var(--text);
+            padding: 40px 25px;
 
-    <script>
-        // Link Firebase Realtime Database của bạn (Nhớ bỏ dấu / ở cuối)
-        const FIREBASE_REST_URL = "https://blox-tracker-default-rtdb.firebaseio.com";
+            background:
+                radial-gradient(circle at 10% 10%, rgba(14,165,233,0.13), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(139,92,246,0.12), transparent 30%),
+                radial-gradient(circle at 50% 100%, rgba(14,165,233,0.08), transparent 35%),
+                #060912;
 
-        async function fetchAccounts() {
-            try {
-                let response = await fetch(FIREBASE_REST_URL);
-                let data = await response.json();
-                
-                let tbody = document.getElementById("accTableBody");
-                tbody.innerHTML = "";
+            overflow-x: hidden;
+        }
 
-                if (!data) {
-                    tbody.innerHTML = `<tr><td colspan="5" style="text-align: center; color: #f87171;">Chưa có tài khoản nào được cập nhật!</td></tr>`;
-                    return;
-                }
+        /* =========================
+           BACKGROUND PARTICLES
+        ========================= */
 
-                for (let username in data) {
-                    let acc = data[username];
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: -1;
+        }
 
-                    // Xử lý danh sách Haki Màu
-                    let hakiHTML = `<span style="color:#9ca3af;">Không có</span>`;
-                    if (acc.hakiColors && acc.hakiColors.length > 0) {
-                        let items = acc.hakiColors.map(c => `<div class="dropdown-item">🎨 ${c}</div>`).join("");
-                        hakiHTML = `
-                            <div class="dropdown-cell">
-                                <div class="dropdown-btn">Haki Màu (${acc.hakiColors.length}) <span>▼</span></div>
-                                <div class="dropdown-menu">${items}</div>
-                            </div>`;
-                    }
+        body::before {
+            background: #0ea5e9;
+            top: -120px;
+            left: -100px;
+        }
 
-                    // Xử lý danh sách Trái Ác Quỷ
-                    let fruitHTML = `<span style="color:#9ca3af;">Không có</span>`;
-                    if (acc.fruits && acc.fruits.length > 0) {
-                        let items = acc.fruits.map(f => `<div class="dropdown-item">🍎 ${f}</div>`).join("");
-                        fruitHTML = `
-                            <div class="dropdown-cell">
-                                <div class="dropdown-btn">Trái (${acc.fruits.length}) <span>▼</span></div>
-                                <div class="dropdown-menu">${items}</div>
-                            </div>`;
-                    }
+        body::after {
+            background: #8b5cf6;
+            right: -120px;
+            bottom: -100px;
+        }
 
-                    let valkBadge = acc.valkyrie === "✔ Có" ? `<span class="badge-yes">✔ Có</span>` : `<span class="badge-no">✖ Không</span>`;
-                    let mirrorBadge = acc.mirror === "✔ Có" ? `<span class="badge-yes">✔ Có</span>` : `<span class="badge-no">✖ Không</span>`;
+        /* =========================
+           HEADER
+        ========================= */
 
-                    let row = `
-                        <tr>
-                            <td><b>${username}</b></td>
-                            <td>${valkBadge}</td>
-                            <td>${mirrorBadge}</td>
-                            <td>${hakiHTML}</td>
-                            <td>${fruitHTML}</td>
-                        </tr>
-                    `;
-                    tbody.innerHTML += row;
-                }
-            } catch (error) {
-                console.error("Lỗi khi kết nối Firebase:", error);
+        .header {
+            max-width: 1250px;
+            margin: 0 auto 28px;
+            text-align: center;
+        }
+
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 7px 14px;
+            margin-bottom: 15px;
+
+            border: 1px solid rgba(74,222,128,0.18);
+            background: rgba(74,222,128,0.06);
+            border-radius: 999px;
+
+            color: #86efac;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 12px #4ade80;
+            animation: pulse 1.8s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.45;
+                transform: scale(0.75);
             }
         }
 
-        // Tự động load và cập nhật dữ liệu mỗi 5 giây
-        fetchAccounts();
-        setInterval(fetchAccounts, 5000);
-    </script>
-</body>
-</html>
+        h2 {
+            font-size: clamp(25px, 4vw, 42px);
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #38bdf8,
+                #8b5cf6,
+                #38bdf8,
+                #ffffff
+            );
+
+            background-size: 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation: titleGradient 6s linear infinite;
+
+            text-shadow: 0 0 30px rgba(56,189,248,0.2);
+        }
+
+        @keyframes titleGradient {
+            0% {
+                background-position: 0%;
+            }
+
+            100% {
+                background-position: 300%;
+            }
+        }
+
+        .subtitle {
+            margin-top: 10px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        /* =========================
+           TABLE CARD
+        ========================= */
+
+        .table-container {
+            max-width: 1250px;
+            margin: auto;
+
+            background: var(--card);
+
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            padding: 8px;
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.45),
+                inset 0 1px 0 rgba(255,255,255,0.03);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            overflow-x: auto;
+
+            animation: cardAppear 0.6s ease;
+        }
+
+        @keyframes cardAppear {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scrollbar */
+
+        .table-container::-webkit-scrollbar {
+            height: 7px;
+        }
+
+        .table-container::-webkit-scrollbar-track {
+            background: #0b1220;
+            border-radius: 20px;
+        }
+
+        .table-container::-webkit-scrollbar-thumb {
+            background: linear-gradient(
+                90deg,
+                #0ea5e9,
+                #8b5cf6
+            );
+
+            border-radius: 20px;
+        }
+
+        /* =========================
+           TABLE
+        ========================= */
+
+        table {
+            width: 100%;
+            min-width: 800px;
+            border-collapse: separate;
+            border-spacing: 0;
+            text-align: left;
+        }
+
+        th,
+        td {
+            padding: 17px 20px;
+            border-bottom: 1px solid rgba(148,163,184,0.07);
+        }
+
+        th {
+            background: rgba(30,41,59,0.75);
+            color: #64748b;
+
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.3px;
+
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        th:first-child {
+            border-radius: 12px 0 0 12px;
+        }
+
+        th:last-child {
+            border-radius: 0 12px 12px 0;
+        }
+
+        tbody tr {
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        tbody tr:hover {
+            background: rgba(56,189,248,0.045);
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        td {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        /* Account name */
+
+        td:first-child b {
+            color: #f8fafc;
+
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        td:first-child b::before {
+            content: "";
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+            background: #38bdf8;
+
+            box-shadow: 0 0 10px rgba(56,189,248,0.8);
+        }
+
+        /* =========================
+           BADGES
+        ========================= */
+
+        .badge-yes,
+        .badge-no {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+
+            padding: 6px 11px;
+            border-radius: 8px;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .badge-yes {
+            color: #86efac;
+            background: rgba(74,222,128,0.07);
+            border: 1px solid rgba(74,222,128,0.13);
+
+            text-shadow: 0 0 10px rgba(74,222,128,0.3);
+        }
+
+        .badge-no {
+            color: #64748b;
+            background: rgba(100,116,139,0.06);
+            border: 1px solid rgba(100,116,139,0.08);
+        }
+
+        /* =========================
+           DROPDOWN
+        ========================= */
+
+        .dropdown-cell {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            position: relative;
+
+            min-width: 130px;
+
+            padding: 8px 12px;
+
+            border-radius: 9px;
+            border: 1px solid rgba(56,189,248,0.15);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(56,189,248,0.08),
+                    rgba(139,92,246,0.07)
+                );
+
+            color: #7
