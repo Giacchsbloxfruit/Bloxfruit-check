@@ -1,38 +1,55 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Blox Fruits Account Manager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blox Fruits Tracker</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-slate-900 text-white p-6">
-    <div class="max-w-7xl mx-auto">
-        <h1 class="text-2xl font-bold mb-6 text-blue-400 border-b border-slate-700 pb-3">BẢNG QUẢN LÝ TÀI KHOẢN BLOX FRUITS</h1>
-        <div class="overflow-x-auto bg-slate-800 rounded-lg shadow-lg">
-            <table class="w-full text-sm text-left text-gray-300">
-                <thead class="text-xs uppercase bg-slate-700 text-gray-200">
+<body class="bg-gray-50 text-gray-800 p-6 font-sans">
+    <div class="max-w-[1400px] mx-auto">
+        <h1 class="text-3xl font-extrabold mb-6 text-gray-800 border-b-2 border-gray-200 pb-3">Account Dashboard</h1>
+        
+        <div class="overflow-x-auto bg-white rounded-xl shadow-md border border-gray-100">
+            <table class="w-full text-sm text-left">
+                <thead class="text-xs uppercase bg-gray-100 text-gray-500">
                     <tr>
-                        <th class="p-3">Username</th>
-                        <th class="p-3">Trạng thái</th>
-                        <th class="p-3">Level</th>
-                        <th class="p-3">Trái Đang Dùng</th>
-                        <th class="p-3">Melee</th>
-                        <th class="p-3">Kiếm</th>
-                        <th class="p-3">Súng</th>
-                        <th class="p-3">Tộc</th>
-                        <th class="p-3">Trái Đỏ (Inven)</th>
+                        <th class="p-4 rounded-tl-xl">Username</th>
+                        <th class="p-4">Status</th>
+                        <th class="p-4">Level</th>
+                        <th class="p-4">Wealth</th>
+                        <th class="p-4">Fruit Used</th>
+                        <th class="p-4">Race</th>
+                        <th class="p-4">Fighting Style</th>
+                        <th class="p-4">Sword</th>
+                        <th class="p-4">Gun</th>
+                        <th class="p-4">Red Fruits</th>
+                        <th class="p-4 text-center">Valkyrie</th>
+                        <th class="p-4 text-center rounded-tr-xl">Mirror</th>
                     </tr>
                 </thead>
                 <tbody id="accountTable">
-                    <tr><td colspan="9" class="p-4 text-center text-gray-400">Đang tải dữ liệu...</td></tr>
+                    <tr><td colspan="12" class="p-6 text-center text-gray-400 font-medium">Loading data...</td></tr>
                 </tbody>
             </table>
         </div>
     </div>
 
     <script>
-        // CẤU HÌNH: Dán URL Firebase của bạn vào đây
+        // THAY LINK FIREBASE CỦA BẠN VÀO ĐÂY (BỎ DẤU / Ở CUỐI)
         const FIREBASE_URL = "https://blox-tracker-default-rtdb.firebaseio.com";
+
+        // Format số tiền (VD: 1000000 -> 1M)
+        function formatNumber(num) {
+            if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+            if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+            return num;
+        }
+
+        async function deleteOldAccount(username) {
+            await fetch(`${FIREBASE_URL}/accounts/${username}.json`, { method: 'DELETE' });
+            console.log(`Deleted old account: ${username}`);
+        }
 
         async function fetchAccounts() {
             try {
@@ -42,38 +59,52 @@
                 tableBody.innerHTML = "";
 
                 if (!data) {
-                    tableBody.innerHTML = `<tr><td colspan="9" class="p-4 text-center text-gray-400">Chưa có acc nào gửi dữ liệu.</td></tr>`;
+                    tableBody.innerHTML = `<tr><td colspan="12" class="p-6 text-center text-gray-400 font-medium">No accounts found.</td></tr>`;
                     return;
                 }
 
                 const currentTime = Math.floor(Date.now() / 1000);
 
-                Object.keys(data).forEach(key => {
+                for (const key of Object.keys(data)) {
                     const acc = data[key];
-                    // Nếu quá 60 giây không gửi dữ liệu thì coi như Offline
-                    const isOnline = (currentTime - acc.last_seen) < 60; 
+                    const timeDiff = currentTime - acc.last_seen;
+
+                    // Nếu acc không gửi dữ liệu quá 3 ngày (259200 giây) -> Xóa khỏi database và không hiển thị
+                    if (timeDiff > 259200) {
+                        deleteOldAccount(key);
+                        continue; 
+                    }
+
+                    // Nếu acc không gửi dữ liệu quá 5 phút (300 giây) -> Báo Offline
+                    const isOnline = timeDiff <= 300; 
                     
                     const statusBadge = isOnline 
-                        ? `<span class="bg-green-500/20 text-green-400 px-2.5 py-1 rounded-full text-xs font-bold border border-green-500/30">ONLINE</span>`
-                        : `<span class="bg-red-500/20 text-red-400 px-2.5 py-1 rounded-full text-xs font-bold border border-red-500/30">OFFLINE</span>`;
+                        ? `<span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-[11px] font-bold tracking-wider">ONLINE</span>`
+                        : `<span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-[11px] font-bold tracking-wider">OFFLINE</span>`;
 
                     const row = `
-                        <tr class="border-b border-slate-700 hover:bg-slate-750 transition">
-                            <td class="p-3 font-semibold text-white">${acc.username}</td>
-                            <td class="p-3">${statusBadge}</td>
-                            <td class="p-3 text-yellow-400 font-bold">${acc.level}</td>
-                            <td class="p-3 text-purple-300">${acc.fruit || 'None'}</td>
-                            <td class="p-3">${acc.melee || 'None'}</td>
-                            <td class="p-3">${acc.sword || 'None'}</td>
-                            <td class="p-3">${acc.gun || 'None'}</td>
-                            <td class="p-3 text-cyan-300">${acc.race || 'Unknown'}</td>
-                            <td class="p-3 text-red-400 font-semibold">${acc.red_fruits || 'Không có'}</td>
+                        <tr class="border-b border-gray-50 hover:bg-gray-50 transition duration-150">
+                            <td class="p-4 font-bold text-gray-900">${acc.username}</td>
+                            <td class="p-4">${statusBadge}</td>
+                            <td class="p-4 font-extrabold text-gray-700">${acc.level}</td>
+                            <td class="p-4">
+                                <div class="text-green-600 font-bold">$${formatNumber(acc.beli)}</div>
+                                <div class="text-purple-600 font-bold mt-1">ƒ${formatNumber(acc.fragments)}</div>
+                            </td>
+                            <td class="p-4 text-purple-700 font-medium">${acc.fruit || 'None'}</td>
+                            <td class="p-4 text-yellow-600 font-semibold">${acc.race || 'Human (v1)'}</td>
+                            <td class="p-4 text-gray-700">${acc.melee || 'None'}</td>
+                            <td class="p-4 text-gray-700">${acc.sword || 'None'}</td>
+                            <td class="p-4 text-gray-700">${acc.gun || 'None'}</td>
+                            <td class="p-4 text-red-500 font-bold text-xs">${acc.red_fruits || 'None'}</td>
+                            <td class="p-4 text-center text-lg">${acc.valkyrie || '❌'}</td>
+                            <td class="p-4 text-center text-lg">${acc.mirror || '❌'}</td>
                         </tr>
                     `;
                     tableBody.innerHTML += row;
-                });
+                }
             } catch (err) {
-                console.error("Lỗi:", err);
+                console.error("Fetch Error:", err);
             }
         }
 
