@@ -362,4 +362,571 @@
                     rgba(139,92,246,0.07)
                 );
 
-            color: #7
+            color: #7dd3fc;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                border 0.2s ease,
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .dropdown-btn span {
+            font-size: 9px;
+            transition: transform 0.25s ease;
+        }
+
+        .dropdown-cell:hover .dropdown-btn {
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(56,189,248,0.15),
+                    rgba(139,92,246,0.13)
+                );
+
+            border-color: rgba(56,189,248,0.35);
+
+            box-shadow:
+                0 0 20px rgba(56,189,248,0.08);
+
+            transform: translateY(-1px);
+        }
+
+        .dropdown-cell:hover .dropdown-btn span {
+            transform: rotate(180deg);
+        }
+
+        /* Menu */
+
+        .dropdown-menu {
+            visibility: hidden;
+            opacity: 0;
+
+            position: absolute;
+
+            top: calc(100% + 7px);
+            left: 0;
+
+            z-index: 9999;
+
+            min-width: 200px;
+            max-width: 280px;
+            max-height: 260px;
+
+            overflow-y: auto;
+
+            padding: 7px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(15,23,42,0.98),
+                    rgba(10,15,28,0.98)
+                );
+
+            border: 1px solid rgba(56,189,248,0.18);
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.7),
+                0 0 30px rgba(56,189,248,0.05);
+
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+
+            transform:
+                translateY(-8px)
+                scale(0.98);
+
+            transform-origin: top left;
+
+            transition:
+                opacity 0.18s ease,
+                transform 0.18s ease,
+                visibility 0.18s ease;
+        }
+
+        /* Khoảng hover giúp rê chuột từ nút xuống menu không bị mất */
+
+        .dropdown-menu::before {
+            content: "";
+
+            position: absolute;
+
+            top: -12px;
+            left: 0;
+
+            width: 100%;
+            height: 12px;
+        }
+
+        .dropdown-cell:hover .dropdown-menu {
+            visibility: visible;
+            opacity: 1;
+
+            transform:
+                translateY(0)
+                scale(1);
+        }
+
+        /* Dropdown scrollbar */
+
+        .dropdown-menu::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        .dropdown-menu::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .dropdown-menu::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 20px;
+        }
+
+        /* Items */
+
+        .dropdown-item {
+            padding: 9px 10px;
+
+            color: #cbd5e1;
+
+            font-size: 12px;
+
+            border-radius: 7px;
+
+            border-bottom: 1px solid rgba(148,163,184,0.06);
+
+            transition:
+                background 0.18s ease,
+                color 0.18s ease,
+                padding-left 0.18s ease;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(56,189,248,0.08);
+            color: #7dd3fc;
+            padding-left: 14px;
+        }
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        .empty {
+            text-align: center;
+            padding: 35px !important;
+            color: #64748b !important;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 25px 12px;
+            }
+
+            h2 {
+                font-size: 23px;
+                letter-spacing: 1px;
+            }
+
+            .subtitle {
+                font-size: 12px;
+            }
+
+            .table-container {
+                border-radius: 14px;
+                padding: 6px;
+            }
+
+            th,
+            td {
+                padding: 14px 15px;
+            }
+
+            .dropdown-menu {
+                max-width: 230px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+
+        <div class="status">
+            <span class="status-dot"></span>
+            LIVE DATABASE CONNECTED
+        </div>
+
+        <h2>⚡ Blox Fruits Account Checker ⚡</h2>
+
+        <p class="subtitle">
+            Real-time account inventory • Automatically updated every 5 seconds
+        </p>
+
+    </div>
+
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+                <tr>
+                    <th>Tên Tài Khoản</th>
+                    <th>Mũ Valkyrie</th>
+                    <th>Mảnh Gương</th>
+                    <th>Haki Màu</th>
+                    <th>Trái Ác Quỷ</th>
+                </tr>
+            </thead>
+
+            <tbody id="accTableBody">
+
+                <tr>
+                    <td colspan="5" class="empty">
+                        ⟳ Đang tải dữ liệu từ Firebase...
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <script>
+
+        // ==========================================
+        // FIREBASE
+        // ==========================================
+
+        const FIREBASE_REST_URL =
+            "https://blox-tracker-default-rtdb.firebaseio.com";
+
+
+        // ==========================================
+        // ESCAPE HTML
+        // Giúp dữ liệu Firebase không phá giao diện
+        // ==========================================
+
+        function escapeHTML(value) {
+
+            return String(value ?? "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+
+        }
+
+
+        // ==========================================
+        // FETCH ACCOUNTS
+        // ==========================================
+
+        async function fetchAccounts() {
+
+            const tbody =
+                document.getElementById("accTableBody");
+
+            try {
+
+                const response =
+                    await fetch(FIREBASE_REST_URL);
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Firebase HTTP " + response.status
+                    );
+                }
+
+                const data =
+                    await response.json();
+
+
+                tbody.innerHTML = "";
+
+
+                if (!data) {
+
+                    tbody.innerHTML = `
+                        <tr>
+                            <td colspan="5" class="empty">
+                                Chưa có tài khoản nào được cập nhật!
+                            </td>
+                        </tr>
+                    `;
+
+                    return;
+                }
+
+
+                // ==========================================
+                // LOOP ACCOUNTS
+                // ==========================================
+
+                for (let username in data) {
+
+                    const acc = data[username];
+
+
+                    // ==========================================
+                    // HAKI COLORS
+                    // ==========================================
+
+                    let hakiHTML =
+                        `<span style="color:#64748b;">Không có</span>`;
+
+
+                    if (
+                        Array.isArray(acc.hakiColors) &&
+                        acc.hakiColors.length > 0
+                    ) {
+
+                        const items =
+                            acc.hakiColors
+                                .map(c => `
+                                    <div class="dropdown-item">
+                                        🎨 ${escapeHTML(c)}
+                                    </div>
+                                `)
+                                .join("");
+
+
+                        hakiHTML = `
+
+                            <div class="dropdown-cell">
+
+                                <div class="dropdown-btn">
+
+                                    <span>
+                                        🎨 Haki Màu
+                                        (${acc.hakiColors.length})
+                                    </span>
+
+                                    <span>▼</span>
+
+                                </div>
+
+                                <div class="dropdown-menu">
+
+                                    ${items}
+
+                                </div>
+
+                            </div>
+
+                        `;
+                    }
+
+
+                    // ==========================================
+                    // FRUITS
+                    // ==========================================
+
+                    let fruitHTML =
+                        `<span style="color:#64748b;">Không có</span>`;
+
+
+                    if (
+                        Array.isArray(acc.fruits) &&
+                        acc.fruits.length > 0
+                    ) {
+
+                        const items =
+                            acc.fruits
+                                .map(f => `
+                                    <div class="dropdown-item">
+                                        🍎 ${escapeHTML(f)}
+                                    </div>
+                                `)
+                                .join("");
+
+
+                        fruitHTML = `
+
+                            <div class="dropdown-cell">
+
+                                <div class="dropdown-btn">
+
+                                    <span>
+                                        🍎 Trái
+                                        (${acc.fruits.length})
+                                    </span>
+
+                                    <span>▼</span>
+
+                                </div>
+
+                                <div class="dropdown-menu">
+
+                                    ${items}
+
+                                </div>
+
+                            </div>
+
+                        `;
+                    }
+
+
+                    // ==========================================
+                    // VALKYRIE
+                    // ==========================================
+
+                    const valkBadge =
+                        acc.valkyrie === "✔ Có"
+
+                            ? `
+                                <span class="badge-yes">
+                                    ✔ Có
+                                </span>
+                              `
+
+                            : `
+                                <span class="badge-no">
+                                    ✖ Không
+                                </span>
+                              `;
+
+
+                    // ==========================================
+                    // MIRROR
+                    // ==========================================
+
+                    const mirrorBadge =
+                        acc.mirror === "✔ Có"
+
+                            ? `
+                                <span class="badge-yes">
+                                    ✔ Có
+                                </span>
+                              `
+
+                            : `
+                                <span class="badge-no">
+                                    ✖ Không
+                                </span>
+                              `;
+
+
+                    // ==========================================
+                    // ROW
+                    // ==========================================
+
+                    const row = `
+
+                        <tr>
+
+                            <td>
+                                <b>
+                                    ${escapeHTML(username)}
+                                </b>
+                            </td>
+
+                            <td>
+                                ${valkBadge}
+                            </td>
+
+                            <td>
+                                ${mirrorBadge}
+                            </td>
+
+                            <td>
+                                ${hakiHTML}
+                            </td>
+
+                            <td>
+                                ${fruitHTML}
+                            </td>
+
+                        </tr>
+
+                    `;
+
+
+                    tbody.insertAdjacentHTML(
+                        "beforeend",
+                        row
+                    );
+
+                }
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Lỗi khi kết nối Firebase:",
+                    error
+                );
+
+                tbody.innerHTML = `
+
+                    <tr>
+
+                        <td colspan="5" class="empty">
+
+                            ⚠ Không thể kết nối Firebase
+
+                            <br>
+
+                            <small style="color:#475569;">
+                                Đang thử kết nối lại...
+                            </small>
+
+                        </td>
+
+                    </tr>
+
+                `;
+
+            }
+
+        }
+
+
+        // ==========================================
+        // INITIAL LOAD
+        // ==========================================
+
+        fetchAccounts();
+
+
+        // ==========================================
+        // AUTO UPDATE EVERY 5 SECONDS
+        // ==========================================
+
+        setInterval(
+            fetchAccounts,
+            5000
+        );
+
+    </script>
+
+</body>
+</html>
