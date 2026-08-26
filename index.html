@@ -154,20 +154,19 @@ table {
     text-align: left;
 }
 
-/* Cân bằng độ rộng các cột tối ưu cho điện thoại */
-th:nth-child(1)  { width: 10%; } /* Tên */
-th:nth-child(2)  { width: 6%;  } /* Level */
-th:nth-child(3)  { width: 8%;  } /* Beli */
-th:nth-child(4)  { width: 8%;  } /* Fragment */
-th:nth-child(5)  { width: 8%;  } /* Tộc */
-th:nth-child(6)  { width: 9%;  } /* Melee */
-th:nth-child(7)  { width: 9%;  } /* Fruit */
-th:nth-child(8)  { width: 9%;  } /* Sword */
-th:nth-child(9)  { width: 8%;  } /* Gun */
-th:nth-child(10) { width: 9%;  } /* Fruit Đồ */
-th:nth-child(11) { width: 8%;  } /* Haki Màu */
-th:nth-child(12) { width: 7%;  } /* Valkyrie */
-th:nth-child(13) { width: 6%;  } /* Mirror */
+th:nth-child(1)  { width: 10%; } 
+th:nth-child(2)  { width: 6%;  } 
+th:nth-child(3)  { width: 8%;  } 
+th:nth-child(4)  { width: 8%;  } 
+th:nth-child(5)  { width: 8%;  } 
+th:nth-child(6)  { width: 9%;  } 
+th:nth-child(7)  { width: 9%;  } 
+th:nth-child(8)  { width: 9%;  } 
+th:nth-child(9)  { width: 8%;  } 
+th:nth-child(10) { width: 9%;  } 
+th:nth-child(11) { width: 8%;  } 
+th:nth-child(12) { width: 7%;  } 
+th:nth-child(13) { width: 6%;  } 
 
 th {
     height: 39px;
@@ -265,7 +264,7 @@ tbody tr:last-child td { border-bottom: none; }
 
 .race-version { color: #67e8f9; font-size: 8px; }
 
-/* STYLE CHO ICON VÀ VẬT PHẨM */
+/* STYLE CHO ICON VÀ VẬT PHẨM VỪA KHUNG */
 .item-icon {
     width: 16px;
     height: 16px;
@@ -527,34 +526,36 @@ const accountActivity = {};
 let accountData = {};
 
 /* ==================================================
-   THƯ VIỆN HÌNH ẢNH (BẠN CÓ THỂ THAY LINK BẤT CỨ LÚC NÀO)
+   FIX 100% LINK ẢNH (DÙNG ĐƯỜNG DẪN ĐẶC BIỆT CHỐNG CHẾT LINK)
 ================================================== */
+const WIKI_IMG = "https://blox-fruits.fandom.com/wiki/Special:FilePath/";
+
 // 1. Ảnh hiển thị Beli, Fragment
 const UI_IMAGES = {
-    "Beli": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/47/MoneyIcon.png",
-    "Fragment": "https://static.wikia.nocookie.net/roblox-blox-piece/images/c/c2/FragmentIcon.png"
+    "Beli": WIKI_IMG + "MoneyIcon.png",
+    "Fragment": WIKI_IMG + "FragmentIcon.png"
 };
 
 // 2. Ảnh hiển thị Tộc (Race)
 const RACE_IMAGES = {
-    "Human": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/6e/Human.png",
-    "Mink": "https://static.wikia.nocookie.net/blox-fruits/images/9/91/Rabbit_Icon.png",
-    "Rabbit": "https://static.wikia.nocookie.net/blox-fruits/images/9/91/Rabbit_Icon.png",
-    "Fishman": "https://static.wikia.nocookie.net/blox-fruits/images/b/bc/Shark_Icon.png",
-    "Shark": "https://static.wikia.nocookie.net/blox-fruits/images/b/bc/Shark_Icon.png",
-    "Skypiean": "https://static.wikia.nocookie.net/blox-fruits/images/a/a2/Angel_Icon.png",
-    "Angel": "https://static.wikia.nocookie.net/blox-fruits/images/a/a2/Angel_Icon.png",
-    "Cyborg": "https://static.wikia.nocookie.net/blox-fruits/images/7/7b/Cyborg_Icon.png",
-    "Ghoul": "https://static.wikia.nocookie.net/blox-fruits/images/f/f3/Ghoul_Icon.png"
+    "Human": WIKI_IMG + "Human.png",
+    "Mink": WIKI_IMG + "Rabbit_Icon.png",
+    "Rabbit": WIKI_IMG + "Rabbit_Icon.png",
+    "Fishman": WIKI_IMG + "Shark_Icon.png",
+    "Shark": WIKI_IMG + "Shark_Icon.png",
+    "Skypiean": WIKI_IMG + "Angel_Icon.png",
+    "Angel": WIKI_IMG + "Angel_Icon.png",
+    "Cyborg": WIKI_IMG + "Cyborg_Icon.png",
+    "Ghoul": WIKI_IMG + "Ghoul_Icon.png"
 };
 
 // 3. Ảnh hiển thị Đồ vật
 const ITEM_IMAGES = {
     // Melee
-    "Combat": "https://static.wikia.nocookie.net/roblox-blox-piece/images/7/7c/Combat.png",
+    "Combat": "https://static.wikia.nocookie.net/blox-fruits/images/7/7c/Combat.png",
     "Godhuman": "https://static.wikia.nocookie.net/blox-fruits/images/1/18/Godhuman.png",
     "Sanguine Art": "https://static.wikia.nocookie.net/blox-fruits/images/b/b3/Sanguine_Art.png",
-    "Electric Claw": "https://static.wikia.nocookie.net/roblox-blox-piece/images/0/00/Electric_Claw.png",
+    "Electric Claw": "https://static.wikia.nocookie.net/blox-fruits/images/0/00/Electric_Claw.png",
     "Sharkman Karate": "https://static.wikia.nocookie.net/blox-fruits/images/d/df/Sharkman_Karate.png",
     "Dragon Talon": "https://static.wikia.nocookie.net/blox-fruits/images/6/6b/Dragon_Talon.png",
     "Death Step": "https://static.wikia.nocookie.net/blox-fruits/images/7/77/Death_Step.png",
@@ -566,11 +567,11 @@ const ITEM_IMAGES = {
     "Dough": "https://static.wikia.nocookie.net/blox-fruits/images/8/84/Dough_Fruit.png",
     "T-Rex": "https://static.wikia.nocookie.net/blox-fruits/images/8/88/T-Rex_Fruit.png",
     "Mammoth": "https://static.wikia.nocookie.net/blox-fruits/images/a/a2/Mammoth_Fruit.png",
-    "Spirit": "https://static.wikia.nocookie.net/roblox-blox-piece/images/6/66/Spirit_Fruit.png",
-    "Venom": "https://static.wikia.nocookie.net/roblox-blox-piece/images/d/d2/Venom_Fruit.png",
+    "Spirit": "https://static.wikia.nocookie.net/blox-fruits/images/6/66/Spirit_Fruit.png",
+    "Venom": "https://static.wikia.nocookie.net/blox-fruits/images/d/d2/Venom_Fruit.png",
     "Shadow": "https://static.wikia.nocookie.net/blox-fruits/images/a/a6/Shadow_Fruit.png",
     "Gravity": "https://static.wikia.nocookie.net/blox-fruits/images/8/82/Gravity_Fruit.png",
-    "Quake": "https://static.wikia.nocookie.net/roblox-blox-piece/images/4/42/Quake_Fruit.png",
+    "Quake": "https://static.wikia.nocookie.net/blox-fruits/images/4/42/Quake_Fruit.png",
     "Buddha": "https://static.wikia.nocookie.net/blox-fruits/images/f/f4/Buddha_Fruit.png",
     "Portal": "https://static.wikia.nocookie.net/blox-fruits/images/8/8f/Portal_Fruit.png",
     "Rumble": "https://static.wikia.nocookie.net/blox-fruits/images/6/65/Rumble_Fruit.png",
@@ -580,13 +581,13 @@ const ITEM_IMAGES = {
     "Dark Blade": "https://static.wikia.nocookie.net/blox-fruits/images/e/ea/Dark_Blade.png",
     "Shark Anchor": "https://static.wikia.nocookie.net/blox-fruits/images/0/03/Shark_Anchor.png",
     "Hallow Scythe": "https://static.wikia.nocookie.net/blox-fruits/images/9/91/Hallow_Scythe.png",
-    "Yama": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/ba/Yama.png",
+    "Yama": "https://static.wikia.nocookie.net/blox-fruits/images/b/ba/Yama.png",
     "Tushita": "https://static.wikia.nocookie.net/blox-fruits/images/9/96/Tushita.png",
     "Fox Lamp": "https://static.wikia.nocookie.net/blox-fruits/images/4/4c/Fox_Lamp.png",
     // Súng
     "Soul Guitar": "https://static.wikia.nocookie.net/blox-fruits/images/7/7a/Soul_Guitar.png",
     "Serpent Bow": "https://static.wikia.nocookie.net/blox-fruits/images/2/22/Serpent_Bow.png",
-    "Kabucha": "https://static.wikia.nocookie.net/roblox-blox-piece/images/b/bb/Kabucha.png"
+    "Kabucha": "https://static.wikia.nocookie.net/blox-fruits/images/b/bb/Kabucha.png"
 };
 
 /* ==================================================
@@ -605,7 +606,6 @@ function formatNumber(value) {
     return number.toLocaleString("en-US");
 }
 
-// Xử lý rút gọn tên vật phẩm lặp lại (VD: Quake-Quake -> Quake)
 function formatItemName(name) {
     if (!name || name === "Không có" || name === "None") return "Không có";
     const str = String(name).trim();
@@ -632,7 +632,7 @@ function getArray(acc, names) {
     return [];
 }
 
-// Hàm lấy Icon chung (Đã sửa referrerpolicy chống bị Fandom chặn)
+// Xử lý nạp ảnh tự động chuẩn khung
 function getIconHtml(itemName, fallbackEmoji, imageDictionary = ITEM_IMAGES) {
     if (!itemName || itemName === "Không có" || itemName === "None") return fallbackEmoji;
     const cleanName = String(itemName).split("-")[0].trim();
@@ -732,7 +732,6 @@ function renderAccounts() {
     for (const accountKey of keys) {
         const acc = accountData[accountKey] || {};
         
-        // KIỂM TRA TỰ ĐỘNG XÓA (Offline > 3 ngày)
         if (acc.last_seen) {
             const lastSeenMs = acc.last_seen * 1000;
             if (now - lastSeenMs > THREE_DAYS_MS) {
@@ -750,10 +749,13 @@ function renderAccounts() {
         const race = getValue(acc, ["race", "Race"], "Unknown");
         const raceVersion = getValue(acc, ["raceVersion", "RaceVersion", "raceV", "RaceV", "raceStage", "RaceStage", "vRace"], "");
 
-        // RENDER ẢNH UI & TỘC 
+        // TỰ ĐỘNG CẮT BỎ CHỮ (v3), (v4) ĐỂ FIX LỖI ẢNH TỘC
+        const baseRace = String(race).replace(/\s*\(.*?\)/g, "").replace(/v\d/ig, "").trim();
+
+        // RENDER ẢNH UI & TỘC ĐÃ ĐƯỢC FIX
         const beliImgHtml = getIconHtml("Beli", "💰", UI_IMAGES);
         const fragImgHtml = getIconHtml("Fragment", "💎", UI_IMAGES);
-        const raceImgHtml = getIconHtml(race, "🧬", RACE_IMAGES);
+        const raceImgHtml = getIconHtml(baseRace, "🧬", RACE_IMAGES);
 
         const raceHTML = `
             <span class="race">
@@ -767,7 +769,6 @@ function renderAccounts() {
         const rawSword = getValue(acc, ["sword", "Sword", "currentSword", "CurrentSword"], "Không có");
         const rawGun = getValue(acc, ["gun", "Gun", "currentGun", "CurrentGun"], "Không có");
 
-        // Format tên hiển thị gọn gàng
         const melee = formatItemName(rawMelee);
         const currentFruit = formatItemName(rawFruit);
         const sword = formatItemName(rawSword);
