@@ -18,51 +18,30 @@
     --bg: #060912;
     --panel: rgba(15, 23, 42, 0.84);
     --panel2: rgba(25, 35, 53, 0.88);
-
     --blue: #38bdf8;
     --cyan: #22d3ee;
     --purple: #8b5cf6;
-
     --green: #4ade80;
     --red: #f87171;
     --yellow: #facc15;
-
     --text: #f8fafc;
     --muted: #94a3b8;
-
     --border: rgba(56, 189, 248, 0.12);
 }
-
-/* =========================================
-   BODY
-========================================= */
 
 body {
     min-height: 100vh;
     padding: 36px 18px 75px;
     color: var(--text);
     background:
-        radial-gradient(
-            circle at 8% 8%,
-            rgba(14, 165, 233, 0.15),
-            transparent 27%
-        ),
-        radial-gradient(
-            circle at 92% 14%,
-            rgba(139, 92, 246, 0.13),
-            transparent 29%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(34, 211, 238, 0.07),
-            transparent 33%
-        ),
+        radial-gradient(circle at 8% 8%, rgba(14, 165, 233, 0.15), transparent 27%),
+        radial-gradient(circle at 92% 14%, rgba(139, 92, 246, 0.13), transparent 29%),
+        radial-gradient(circle at 50% 100%, rgba(34, 211, 238, 0.07), transparent 33%),
         #060912;
     overflow-x: hidden;
 }
 
-body::before,
-body::after {
+body::before, body::after {
     content: "";
     position: fixed;
     width: 320px;
@@ -74,22 +53,12 @@ body::after {
     z-index: -1;
 }
 
-body::before {
-    background: #0ea5e9;
-    top: -130px;
-    left: -100px;
-}
-
-body::after {
-    background: #8b5cf6;
-    right: -120px;
-    bottom: -120px;
-}
+body::before { background: #0ea5e9; top: -130px; left: -100px; }
+body::after { background: #8b5cf6; right: -120px; bottom: -120px; }
 
 /* =========================================
    HEADER
 ========================================= */
-
 .header {
     max-width: 1500px;
     margin: 0 auto 25px;
@@ -117,9 +86,7 @@ body::after {
     height: 7px;
     border-radius: 50%;
     background: var(--green);
-    box-shadow:
-        0 0 7px rgba(74, 222, 128, 0.9),
-        0 0 15px rgba(74, 222, 128, 0.45);
+    box-shadow: 0 0 7px rgba(74, 222, 128, 0.9), 0 0 15px rgba(74, 222, 128, 0.45);
     animation: statusPulse 1.8s infinite;
 }
 
@@ -151,16 +118,11 @@ h1 {
     50% { filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.22)); opacity: 0.94; }
 }
 
-.subtitle {
-    margin-top: 9px;
-    color: #64748b;
-    font-size: 12px;
-}
+.subtitle { margin-top: 9px; color: #64748b; font-size: 12px; }
 
 /* =========================================
    TABLE CONTAINER
 ========================================= */
-
 .table-container {
     width: 100%;
     max-width: 1500px;
@@ -172,9 +134,10 @@ h1 {
     box-shadow: 0 25px 70px rgba(0, 0, 0, 0.46), inset 0 1px 0 rgba(255,255,255,0.025);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-    min-height: 350px;
+    
+    /* FIX LỖI DROPDOWN BỊ CẮT */
+    min-height: 350px; 
     overflow-x: auto;
-    overflow-y: visible;
     animation: tableAppear 0.55s ease;
 }
 
@@ -182,10 +145,6 @@ h1 {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
 }
-
-/* =========================================
-   TABLE
-========================================= */
 
 table {
     width: 100%;
@@ -243,7 +202,6 @@ tbody tr:last-child td { border-bottom: none; }
 /* =========================================
    USER
 ========================================= */
-
 .username-box {
     display: flex;
     align-items: center;
@@ -286,7 +244,6 @@ tbody tr:last-child td { border-bottom: none; }
 /* =========================================
    NUMBERS & RACE & EQUIPMENT
 ========================================= */
-
 .level { color: #fde047; font-weight: 800; }
 .beli { color: #6ee7a0; font-weight: 700; }
 .fragment { color: #c084fc; font-weight: 700; }
@@ -308,12 +265,26 @@ tbody tr:last-child td { border-bottom: none; }
 
 .race-version { color: #67e8f9; font-size: 8px; }
 
-.equipment {
-    display: block;
-    width: 100%;
+/* STYLE CHO ICON VÀ VẬT PHẨM */
+.item-icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    object-fit: cover;
+    vertical-align: text-bottom;
+    margin-right: 5px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.equipment-wrapper {
+    display: flex;
+    align-items: center;
     overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.equipment {
     color: #cbd5e1;
     font-size: 10px;
     transition: color .15s ease;
@@ -323,7 +294,6 @@ tbody tr:hover .equipment { color: #e2e8f0; }
 /* =========================================
    YES / NO
 ========================================= */
-
 .badge {
     display: inline-flex;
     align-items: center;
@@ -351,7 +321,6 @@ tbody tr:hover .equipment { color: #e2e8f0; }
 /* =========================================
    DROPDOWN
 ========================================= */
-
 .dropdown-cell {
     position: relative;
     display: inline-block;
@@ -443,7 +412,6 @@ tbody tr:hover .equipment { color: #e2e8f0; }
 /* =========================================
    BOTTOM ONLINE / OFFLINE
 ========================================= */
-
 .counter {
     position: fixed;
     right: 16px;
@@ -480,7 +448,6 @@ tbody tr:hover .equipment { color: #e2e8f0; }
 /* =========================================
    SCROLLBAR & MISC
 ========================================= */
-
 .table-container::-webkit-scrollbar { height: 7px; }
 .table-container::-webkit-scrollbar-track { background: rgba(7,11,18,.85); }
 .table-container::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #0ea5e9, #8b5cf6); border-radius: 20px; }
@@ -549,12 +516,54 @@ const ACCOUNTS_URL = FIREBASE_URL + "/accounts";
 const STREAM_URL = ACCOUNTS_URL + ".json";
 
 /* ==================================================
-   ONLINE SETTINGS
+   SETTINGS
 ================================================== */
-// 5 phút không có dữ liệu mới => OFFLINE
-const OFFLINE_TIMEOUT = 5 * 60 * 1000;
-const accountActivity = {}; // Dùng fallback nếu ko có last_seen
+const OFFLINE_TIMEOUT = 5 * 60 * 1000; // 5 phút là offline
+const THREE_DAYS_MS = 3 * 24 * 60 * 60 * 1000; // 3 ngày để xóa
+const accountActivity = {}; 
 let accountData = {};
+
+/* ==================================================
+   THƯ VIỆN HÌNH ẢNH VẬT PHẨM (WIKI BLOX FRUITS)
+================================================== */
+const ITEM_IMAGES = {
+    // Melee
+    "Godhuman": "https://static.wikia.nocookie.net/blox-fruits/images/1/18/Godhuman.png",
+    "Sanguine Art": "https://static.wikia.nocookie.net/blox-fruits/images/b/b3/Sanguine_Art.png",
+    "Electric Claw": "https://static.wikia.nocookie.net/blox-fruits/images/f/f6/Electric_Claw.png",
+    "Sharkman Karate": "https://static.wikia.nocookie.net/blox-fruits/images/d/df/Sharkman_Karate.png",
+    "Dragon Talon": "https://static.wikia.nocookie.net/blox-fruits/images/6/6b/Dragon_Talon.png",
+    "Death Step": "https://static.wikia.nocookie.net/blox-fruits/images/7/77/Death_Step.png",
+    "Superhuman": "https://static.wikia.nocookie.net/blox-fruits/images/2/23/Superhuman.png",
+    // Trái ác quỷ
+    "Kitsune": "https://static.wikia.nocookie.net/blox-fruits/images/8/87/Kitsune_Fruit.png",
+    "Dragon": "https://static.wikia.nocookie.net/blox-fruits/images/4/4c/Dragon_Fruit.png",
+    "Leopard": "https://static.wikia.nocookie.net/blox-fruits/images/a/af/Leopard_Fruit.png",
+    "Dough": "https://static.wikia.nocookie.net/blox-fruits/images/8/84/Dough_Fruit.png",
+    "T-Rex": "https://static.wikia.nocookie.net/blox-fruits/images/8/88/T-Rex_Fruit.png",
+    "Mammoth": "https://static.wikia.nocookie.net/blox-fruits/images/a/a2/Mammoth_Fruit.png",
+    "Spirit": "https://static.wikia.nocookie.net/blox-fruits/images/7/77/Spirit_Fruit.png",
+    "Venom": "https://static.wikia.nocookie.net/blox-fruits/images/6/67/Venom_Fruit.png",
+    "Shadow": "https://static.wikia.nocookie.net/blox-fruits/images/a/a6/Shadow_Fruit.png",
+    "Gravity": "https://static.wikia.nocookie.net/blox-fruits/images/8/82/Gravity_Fruit.png",
+    "Quake": "https://static.wikia.nocookie.net/blox-fruits/images/c/c2/Quake_Fruit.png",
+    "Buddha": "https://static.wikia.nocookie.net/blox-fruits/images/f/f4/Buddha_Fruit.png",
+    "Portal": "https://static.wikia.nocookie.net/blox-fruits/images/8/8f/Portal_Fruit.png",
+    "Rumble": "https://static.wikia.nocookie.net/blox-fruits/images/6/65/Rumble_Fruit.png",
+    // Kiếm
+    "Cursed Dual Katana": "https://static.wikia.nocookie.net/blox-fruits/images/9/9f/Cursed_Dual_Katana.png",
+    "True Triple Katana": "https://static.wikia.nocookie.net/blox-fruits/images/6/60/True_Triple_Katana.png",
+    "Dark Blade": "https://static.wikia.nocookie.net/blox-fruits/images/e/ea/Dark_Blade.png",
+    "Shark Anchor": "https://static.wikia.nocookie.net/blox-fruits/images/0/03/Shark_Anchor.png",
+    "Hallow Scythe": "https://static.wikia.nocookie.net/blox-fruits/images/9/91/Hallow_Scythe.png",
+    "Yama": "https://static.wikia.nocookie.net/blox-fruits/images/8/8b/Yama.png",
+    "Tushita": "https://static.wikia.nocookie.net/blox-fruits/images/9/96/Tushita.png",
+    "Fox Lamp": "https://static.wikia.nocookie.net/blox-fruits/images/4/4c/Fox_Lamp.png",
+    // Súng
+    "Soul Guitar": "https://static.wikia.nocookie.net/blox-fruits/images/7/7a/Soul_Guitar.png",
+    "Serpent Bow": "https://static.wikia.nocookie.net/blox-fruits/images/2/22/Serpent_Bow.png",
+    "Kabucha": "https://static.wikia.nocookie.net/blox-fruits/images/7/71/Kabucha.png"
+};
 
 /* ==================================================
    HELPERS
@@ -574,9 +583,7 @@ function formatNumber(value) {
 
 function getValue(acc, names, fallback = "") {
     for (const name of names) {
-        if (acc[name] !== undefined && acc[name] !== null && acc[name] !== "") {
-            return acc[name];
-        }
+        if (acc[name] !== undefined && acc[name] !== null && acc[name] !== "") return acc[name];
     }
     return fallback;
 }
@@ -590,6 +597,27 @@ function getArray(acc, names) {
     return [];
 }
 
+function getIconHtml(itemName, fallbackEmoji) {
+    if (!itemName || itemName === "Không có" || itemName === "None") return fallbackEmoji;
+    const cleanName = itemName.split("-")[0].trim();
+    if (ITEM_IMAGES[cleanName]) {
+        return `<img src="${ITEM_IMAGES[cleanName]}" class="item-icon" alt="${cleanName}" onerror="this.outerHTML='${fallbackEmoji}'">`;
+    }
+    return fallbackEmoji;
+}
+
+/* ==================================================
+   AUTO DELETE FIREBASE
+================================================== */
+async function deleteAccountFromDatabase(accountKey) {
+    try {
+        await fetch(`${ACCOUNTS_URL}/${accountKey}.json`, { method: "DELETE" });
+        console.log(`Đã xóa vĩnh viễn acc: ${accountKey} (Offline quá 3 ngày)`);
+    } catch (e) {
+        console.error("Lỗi khi xóa acc:", e);
+    }
+}
+
 /* ==================================================
    UI BUILDERS
 ================================================== */
@@ -600,15 +628,18 @@ function createBadge(value) {
     return `<span class="badge badge-no">✖ Không</span>`;
 }
 
-function createDropdown(icon, title, list) {
+function createDropdown(iconEmoji, title, list) {
     if (!list || list.length === 0) {
         return `<span style="color:#64748b; font-size:9px;">Không có</span>`;
     }
-    const items = list.map(item => `<div class="dropdown-item">${icon} ${escapeHTML(item)}</div>`).join("");
+    const items = list.map(item => {
+        const imgHtml = getIconHtml(item, iconEmoji);
+        return `<div class="dropdown-item equipment-wrapper">${imgHtml} <span>${escapeHTML(item)}</span></div>`;
+    }).join("");
     return `
         <div class="dropdown-cell">
             <div class="dropdown-btn">
-                <span>${icon} ${title} (${list.length})</span>
+                <span>${iconEmoji} ${title} (${list.length})</span>
                 <span class="dropdown-arrow">▼</span>
             </div>
             <div class="dropdown-menu">${items}</div>
@@ -617,15 +648,13 @@ function createDropdown(icon, title, list) {
 }
 
 /* ==================================================
-   ONLINE CHECK (ĐÃ FIX SỬ DỤNG LAST_SEEN TỪ DATABASE)
+   ONLINE CHECK
 ================================================== */
 function isOnline(accountKey, acc) {
-    // Ưu tiên đọc dữ liệu last_seen chuẩn xác từ server Lua gửi lên
     if (acc && acc.last_seen) {
-        const lastSeenMs = acc.last_seen * 1000; // Đổi os.time (giây) sang mili giây
+        const lastSeenMs = acc.last_seen * 1000;
         return (Date.now() - lastSeenMs <= OFFLINE_TIMEOUT);
     }
-    // Fallback: nếu account cũ không có last_seen thì xài local timestamp
     const last = accountActivity[accountKey];
     if (!last) return false;
     return (Date.now() - last <= OFFLINE_TIMEOUT);
@@ -637,14 +666,10 @@ function markOnline(accountKey) {
 }
 
 function updateCounters() {
-    let online = 0;
-    let offline = 0;
+    let online = 0, offline = 0;
     for (const key in accountData) {
-        if (isOnline(key, accountData[key])) {
-            online++;
-        } else {
-            offline++;
-        }
+        if (isOnline(key, accountData[key])) online++;
+        else offline++;
     }
     document.getElementById("onlineCount").textContent = online;
     document.getElementById("offlineCount").textContent = offline;
@@ -664,12 +689,22 @@ function renderAccounts() {
         return;
     }
 
+    const now = Date.now();
+
     for (const accountKey of keys) {
         const acc = accountData[accountKey] || {};
         
-        // Cập nhật trạng thái online chuẩn dựa trên acc data
-        const online = isOnline(accountKey, acc);
+        // KIỂM TRA TỰ ĐỘNG XÓA (Offline > 3 ngày)
+        if (acc.last_seen) {
+            const lastSeenMs = acc.last_seen * 1000;
+            if (now - lastSeenMs > THREE_DAYS_MS) {
+                deleteAccountFromDatabase(accountKey);
+                delete accountData[accountKey]; 
+                continue; 
+            }
+        }
 
+        const online = isOnline(accountKey, acc);
         const username = getValue(acc, ["username", "Username", "user", "name", "Name"], accountKey);
         const level = getValue(acc, ["level", "Level", "lv", "Lv"], 0);
         const beli = getValue(acc, ["beli", "Beli", "money", "Money"], 0);
@@ -688,10 +723,8 @@ function renderAccounts() {
         const sword = getValue(acc, ["sword", "Sword", "currentSword", "CurrentSword"], "Không có");
         const gun = getValue(acc, ["gun", "Gun", "currentGun", "CurrentGun"], "Không có");
 
-        // FIX: Thêm "red_fruits" và "haki_colors" để khớp với code Lua gửi lên
         const fruits = getArray(acc, ["red_fruits", "fruits", "Fruits", "fruitInventory", "InventoryFruits"]);
         const haki = getArray(acc, ["haki_colors", "hakiColors", "HakiColors", "haki", "Haki", "colors", "Colors"]);
-        
         const valkyrie = getValue(acc, ["valkyrie", "Valkyrie", "valk", "Valk"], false);
         const mirror = getValue(acc, ["mirror", "Mirror"], false);
 
@@ -707,10 +740,32 @@ function renderAccounts() {
                 <td><span class="beli">💰 ${formatNumber(beli)}</span></td>
                 <td><span class="fragment">💎 ${formatNumber(fragments)}</span></td>
                 <td>${raceHTML}</td>
-                <td><span class="equipment" title="${escapeHTML(melee)}">${escapeHTML(melee)}</span></td>
-                <td><span class="equipment" title="${escapeHTML(currentFruit)}">${escapeHTML(currentFruit)}</span></td>
-                <td><span class="equipment" title="${escapeHTML(sword)}">${escapeHTML(sword)}</span></td>
-                <td><span class="equipment" title="${escapeHTML(gun)}">${escapeHTML(gun)}</span></td>
+                
+                <td>
+                    <div class="equipment-wrapper" title="${escapeHTML(melee)}">
+                        ${getIconHtml(melee, "🥊")} 
+                        <span class="equipment">${escapeHTML(melee)}</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="equipment-wrapper" title="${escapeHTML(currentFruit)}">
+                        ${getIconHtml(currentFruit, "🍎")} 
+                        <span class="equipment">${escapeHTML(currentFruit)}</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="equipment-wrapper" title="${escapeHTML(sword)}">
+                        ${getIconHtml(sword, "⚔️")} 
+                        <span class="equipment">${escapeHTML(sword)}</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="equipment-wrapper" title="${escapeHTML(gun)}">
+                        ${getIconHtml(gun, "🔫")} 
+                        <span class="equipment">${escapeHTML(gun)}</span>
+                    </div>
+                </td>
+
                 <td>${createDropdown("🍎", "Fruit", fruits)}</td>
                 <td>${createDropdown("🎨", "Haki", haki)}</td>
                 <td>${createBadge(valkyrie)}</td>
@@ -731,9 +786,6 @@ async function fetchAccounts() {
         if (!response.ok) throw new Error("Firebase HTTP " + response.status);
         const data = await response.json();
         accountData = data || {};
-        
-        // Đã xóa hàm markOnline(key) ở đây để fix lỗi auto online khi load trang
-        
         renderAccounts();
     } catch (error) {
         console.error("Firebase Error:", error);
@@ -767,7 +819,6 @@ function startFirebaseStream() {
             const accountKey = parts[0];
             if (!accountKey) return;
 
-            // Đánh dấu online ngay lúc stream nhận được sự kiện (có thay đổi từ server)
             markOnline(accountKey);
 
             if (parts.length === 1) {
@@ -799,7 +850,7 @@ function startFirebaseStream() {
 /* ==================================================
    CHECK OFFLINE & INTERVALS
 ================================================== */
-setInterval(renderAccounts, 10000); // Check lại trạng thái mỗi 10s
+setInterval(renderAccounts, 10000); 
 fetchAccounts();
 startFirebaseStream();
 setInterval(fetchAccounts, 5000);
