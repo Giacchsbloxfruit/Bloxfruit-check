@@ -135,7 +135,6 @@ h1 {
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     
-    /* FIX LỖI DROPDOWN BỊ CẮT */
     min-height: 350px; 
     overflow-x: auto;
     animation: tableAppear 0.55s ease;
@@ -244,9 +243,9 @@ tbody tr:last-child td { border-bottom: none; }
 /* =========================================
    NUMBERS & RACE & EQUIPMENT
 ========================================= */
-.level { color: #fde047; font-weight: 800; }
-.beli { color: #6ee7a0; font-weight: 700; }
-.fragment { color: #c084fc; font-weight: 700; }
+.level { color: #fde047; font-weight: 800; display: flex; align-items: center; gap: 4px; }
+.beli { color: #6ee7a0; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+.fragment { color: #c084fc; font-weight: 700; display: flex; align-items: center; gap: 4px; }
 
 .race {
     display: inline-flex;
@@ -272,13 +271,13 @@ tbody tr:last-child td { border-bottom: none; }
     border-radius: 4px;
     object-fit: cover;
     vertical-align: text-bottom;
-    margin-right: 5px;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .equipment-wrapper {
     display: flex;
     align-items: center;
+    gap: 5px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -524,8 +523,28 @@ const accountActivity = {};
 let accountData = {};
 
 /* ==================================================
-   THƯ VIỆN HÌNH ẢNH VẬT PHẨM (WIKI BLOX FRUITS)
+   THƯ VIỆN HÌNH ẢNH (BẠN CÓ THỂ THAY LINK BẤT CỨ LÚC NÀO)
 ================================================== */
+// 1. Ảnh hiển thị Beli, Fragment
+const UI_IMAGES = {
+    "Beli": "https://static.wikia.nocookie.net/blox-fruits/images/4/46/Beli.png",
+    "Fragment": "https://static.wikia.nocookie.net/blox-fruits/images/d/d4/Fragment_Icon.png"
+};
+
+// 2. Ảnh hiển thị Tộc (Race)
+const RACE_IMAGES = {
+    "Human": "https://static.wikia.nocookie.net/blox-fruits/images/2/23/Human_Icon.png",
+    "Mink": "https://static.wikia.nocookie.net/blox-fruits/images/9/91/Rabbit_Icon.png",
+    "Rabbit": "https://static.wikia.nocookie.net/blox-fruits/images/9/91/Rabbit_Icon.png",
+    "Fishman": "https://static.wikia.nocookie.net/blox-fruits/images/b/bc/Shark_Icon.png",
+    "Shark": "https://static.wikia.nocookie.net/blox-fruits/images/b/bc/Shark_Icon.png",
+    "Skypiean": "https://static.wikia.nocookie.net/blox-fruits/images/a/a2/Angel_Icon.png",
+    "Angel": "https://static.wikia.nocookie.net/blox-fruits/images/a/a2/Angel_Icon.png",
+    "Cyborg": "https://static.wikia.nocookie.net/blox-fruits/images/7/7b/Cyborg_Icon.png",
+    "Ghoul": "https://static.wikia.nocookie.net/blox-fruits/images/f/f3/Ghoul_Icon.png"
+};
+
+// 3. Ảnh hiển thị Đồ vật
 const ITEM_IMAGES = {
     // Melee
     "Godhuman": "https://static.wikia.nocookie.net/blox-fruits/images/1/18/Godhuman.png",
@@ -597,11 +616,12 @@ function getArray(acc, names) {
     return [];
 }
 
-function getIconHtml(itemName, fallbackEmoji) {
+// Hàm lấy Icon chung (hỗ trợ đọc từ các danh sách ảnh khác nhau)
+function getIconHtml(itemName, fallbackEmoji, imageDictionary = ITEM_IMAGES) {
     if (!itemName || itemName === "Không có" || itemName === "None") return fallbackEmoji;
     const cleanName = itemName.split("-")[0].trim();
-    if (ITEM_IMAGES[cleanName]) {
-        return `<img src="${ITEM_IMAGES[cleanName]}" class="item-icon" alt="${cleanName}" onerror="this.outerHTML='${fallbackEmoji}'">`;
+    if (imageDictionary[cleanName]) {
+        return `<img src="${imageDictionary[cleanName]}" class="item-icon" alt="${cleanName}" onerror="this.outerHTML='${fallbackEmoji}'">`;
     }
     return fallbackEmoji;
 }
@@ -633,7 +653,7 @@ function createDropdown(iconEmoji, title, list) {
         return `<span style="color:#64748b; font-size:9px;">Không có</span>`;
     }
     const items = list.map(item => {
-        const imgHtml = getIconHtml(item, iconEmoji);
+        const imgHtml = getIconHtml(item, iconEmoji, ITEM_IMAGES);
         return `<div class="dropdown-item equipment-wrapper">${imgHtml} <span>${escapeHTML(item)}</span></div>`;
     }).join("");
     return `
@@ -712,8 +732,14 @@ function renderAccounts() {
         const race = getValue(acc, ["race", "Race"], "Unknown");
         const raceVersion = getValue(acc, ["raceVersion", "RaceVersion", "raceV", "RaceV", "raceStage", "RaceStage", "vRace"], "");
 
+        // RENDER ẢNH UI & TỘC 
+        const beliImgHtml = getIconHtml("Beli", "💰", UI_IMAGES);
+        const fragImgHtml = getIconHtml("Fragment", "💎", UI_IMAGES);
+        const raceImgHtml = getIconHtml(race, "🧬", RACE_IMAGES);
+
         const raceHTML = `
-            <span class="race">🧬 ${escapeHTML(race)}
+            <span class="race">
+                ${raceImgHtml} ${escapeHTML(race)}
                 ${raceVersion ? `<span class="race-version">${escapeHTML(raceVersion)}</span>` : ""}
             </span>
         `;
@@ -737,8 +763,8 @@ function renderAccounts() {
                     </div>
                 </td>
                 <td><span class="level">⭐ ${formatNumber(level)}</span></td>
-                <td><span class="beli">💰 ${formatNumber(beli)}</span></td>
-                <td><span class="fragment">💎 ${formatNumber(fragments)}</span></td>
+                <td><span class="beli">${beliImgHtml} ${formatNumber(beli)}</span></td>
+                <td><span class="fragment">${fragImgHtml} ${formatNumber(fragments)}</span></td>
                 <td>${raceHTML}</td>
                 
                 <td>
