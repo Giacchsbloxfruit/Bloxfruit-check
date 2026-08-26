@@ -39,11 +39,8 @@
 
 body {
     min-height: 100vh;
-
     padding: 36px 18px 75px;
-
     color: var(--text);
-
     background:
         radial-gradient(
             circle at 8% 8%,
@@ -61,46 +58,33 @@ body {
             transparent 33%
         ),
         #060912;
-
     overflow-x: hidden;
 }
-
-/* Ambient glow */
 
 body::before,
 body::after {
     content: "";
-
     position: fixed;
-
     width: 320px;
     height: 320px;
-
     border-radius: 50%;
-
     filter: blur(110px);
-
     opacity: 0.10;
-
     pointer-events: none;
-
     z-index: -1;
 }
 
 body::before {
     background: #0ea5e9;
-
     top: -130px;
     left: -100px;
 }
 
 body::after {
     background: #8b5cf6;
-
     right: -120px;
     bottom: -120px;
 }
-
 
 /* =========================================
    HEADER
@@ -108,138 +92,70 @@ body::after {
 
 .header {
     max-width: 1500px;
-
     margin: 0 auto 25px;
-
     text-align: center;
 }
 
 .status {
     display: inline-flex;
-
     align-items: center;
     gap: 8px;
-
     padding: 7px 14px;
-
     margin-bottom: 14px;
-
     border-radius: 999px;
-
     background: rgba(74, 222, 128, 0.055);
-
     border: 1px solid rgba(74, 222, 128, 0.16);
-
     color: #86efac;
-
     font-size: 11px;
     font-weight: 700;
-
     letter-spacing: 0.8px;
-
-    box-shadow:
-        0 0 20px rgba(74, 222, 128, 0.03);
+    box-shadow: 0 0 20px rgba(74, 222, 128, 0.03);
 }
 
 .status-dot {
     width: 7px;
     height: 7px;
-
     border-radius: 50%;
-
     background: var(--green);
-
     box-shadow:
         0 0 7px rgba(74, 222, 128, 0.9),
         0 0 15px rgba(74, 222, 128, 0.45);
-
     animation: statusPulse 1.8s infinite;
 }
 
 @keyframes statusPulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-
-    50% {
-        transform: scale(0.7);
-        opacity: 0.55;
-    }
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(0.7); opacity: 0.55; }
 }
 
 h1 {
     font-size: clamp(25px, 4vw, 41px);
-
     font-weight: 900;
-
     letter-spacing: 2px;
-
     text-transform: uppercase;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            #38bdf8,
-            #8b5cf6,
-            #22d3ee,
-            #ffffff
-        );
-
+    background: linear-gradient(90deg, #ffffff, #38bdf8, #8b5cf6, #22d3ee, #ffffff);
     background-size: 300%;
-
     -webkit-background-clip: text;
     background-clip: text;
-
     -webkit-text-fill-color: transparent;
-
-    animation:
-        titleGradient 7s linear infinite,
-        titleGlow 3.5s ease-in-out infinite;
+    animation: titleGradient 7s linear infinite, titleGlow 3.5s ease-in-out infinite;
 }
 
 @keyframes titleGradient {
-    0% {
-        background-position: 0%;
-    }
-
-    100% {
-        background-position: 300%;
-    }
+    0% { background-position: 0%; }
+    100% { background-position: 300%; }
 }
 
-/* Nhấp nháy rất nhẹ */
-
 @keyframes titleGlow {
-
-    0%, 100% {
-        filter:
-            drop-shadow(
-                0 0 5px
-                rgba(56, 189, 248, 0.10)
-            );
-        opacity: 1;
-    }
-
-    50% {
-        filter:
-            drop-shadow(
-                0 0 15px
-                rgba(56, 189, 248, 0.22)
-            );
-        opacity: 0.94;
-    }
+    0%, 100% { filter: drop-shadow(0 0 5px rgba(56, 189, 248, 0.10)); opacity: 1; }
+    50% { filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.22)); opacity: 0.94; }
 }
 
 .subtitle {
     margin-top: 9px;
-
     color: #64748b;
-
     font-size: 12px;
 }
-
 
 /* =========================================
    TABLE CONTAINER
@@ -248,47 +164,23 @@ h1 {
 .table-container {
     width: 100%;
     max-width: 1500px;
-
     margin: auto;
-
     padding: 8px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(17, 24, 39, 0.92),
-            rgba(9, 14, 24, 0.92)
-        );
-
+    background: linear-gradient(145deg, rgba(17, 24, 39, 0.92), rgba(9, 14, 24, 0.92));
     border: 1px solid var(--border);
-
     border-radius: 16px;
-
-    box-shadow:
-        0 25px 70px rgba(0, 0, 0, 0.46),
-        inset 0 1px 0 rgba(255,255,255,0.025);
-
+    box-shadow: 0 25px 70px rgba(0, 0, 0, 0.46), inset 0 1px 0 rgba(255,255,255,0.025);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
-
     overflow-x: auto;
     overflow-y: visible;
-
     animation: tableAppear 0.55s ease;
 }
 
 @keyframes tableAppear {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
 
 /* =========================================
    TABLE
@@ -296,21 +188,12 @@ h1 {
 
 table {
     width: 100%;
-
     min-width: 1320px;
-
     table-layout: fixed;
-
     border-collapse: separate;
-
     border-spacing: 0;
-
     text-align: left;
 }
-
-/*
-   Phân bố cột
-*/
 
 th:nth-child(1)  { width: 11%; }
 th:nth-child(2)  { width: 5%;  }
@@ -328,77 +211,33 @@ th:nth-child(13) { width: 7%;  }
 
 th {
     height: 39px;
-
     padding: 0 10px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(31, 41, 55, 0.80),
-            rgba(25, 35, 50, 0.72)
-        );
-
-    border-bottom:
-        1px solid rgba(148, 163, 184, 0.08);
-
+    background: linear-gradient(180deg, rgba(31, 41, 55, 0.80), rgba(25, 35, 50, 0.72));
+    border-bottom: 1px solid rgba(148, 163, 184, 0.08);
     color: #7c8796;
-
     font-size: 9px;
-
     font-weight: 700;
-
     letter-spacing: 1px;
-
     text-transform: uppercase;
-
     white-space: nowrap;
 }
 
-th:first-child {
-    border-radius: 11px 0 0 11px;
-}
-
-th:last-child {
-    border-radius: 0 11px 11px 0;
-}
+th:first-child { border-radius: 11px 0 0 11px; }
+th:last-child { border-radius: 0 11px 11px 0; }
 
 td {
     height: 48px;
-
     padding: 0 10px;
-
-    border-bottom:
-        1px solid
-        rgba(148, 163, 184, 0.055);
-
+    border-bottom: 1px solid rgba(148, 163, 184, 0.055);
     color: #cbd5e1;
-
     font-size: 10.5px;
-
     vertical-align: middle;
-
     overflow: visible;
 }
 
-tbody tr {
-    transition:
-        background .20s ease,
-        transform .20s ease;
-}
-
-tbody tr:hover {
-    background:
-        linear-gradient(
-            90deg,
-            rgba(56,189,248,.045),
-            rgba(139,92,246,.025)
-        );
-}
-
-tbody tr:last-child td {
-    border-bottom: none;
-}
-
+tbody tr { transition: background .20s ease, transform .20s ease; }
+tbody tr:hover { background: linear-gradient(90deg, rgba(56,189,248,.045), rgba(139,92,246,.025)); }
+tbody tr:last-child td { border-bottom: none; }
 
 /* =========================================
    USER
@@ -406,158 +245,79 @@ tbody tr:last-child td {
 
 .username-box {
     display: flex;
-
     align-items: center;
-
     gap: 7px;
-
     min-width: 0;
 }
 
 .account-dot {
     width: 7px;
     height: 7px;
-
     flex: 0 0 7px;
-
     border-radius: 50%;
 }
 
 .account-online {
     background: var(--green);
-
-    box-shadow:
-        0 0 7px rgba(74, 222, 128, .8),
-        0 0 14px rgba(74, 222, 128, .25);
-
+    box-shadow: 0 0 7px rgba(74, 222, 128, .8), 0 0 14px rgba(74, 222, 128, .25);
     animation: onlinePulse 2.1s ease-in-out infinite;
 }
 
 @keyframes onlinePulse {
-    0%, 100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: .58;
-    }
+    0%, 100% { opacity: 1; }
+    50% { opacity: .58; }
 }
 
 .account-offline {
     background: var(--red);
-
-    box-shadow:
-        0 0 6px rgba(248, 113, 113, .25);
+    box-shadow: 0 0 6px rgba(248, 113, 113, .25);
 }
 
 .username {
     min-width: 0;
-
     overflow: hidden;
-
     text-overflow: ellipsis;
-
     white-space: nowrap;
-
     color: #f8fafc;
-
     font-weight: 700;
 }
-
 
 /* =========================================
-   NUMBERS
+   NUMBERS & RACE & EQUIPMENT
 ========================================= */
 
-.level {
-    color: #fde047;
-
-    font-weight: 800;
-}
-
-.beli {
-    color: #6ee7a0;
-
-    font-weight: 700;
-}
-
-.fragment {
-    color: #c084fc;
-
-    font-weight: 700;
-}
-
-
-/* =========================================
-   RACE
-========================================= */
+.level { color: #fde047; font-weight: 800; }
+.beli { color: #6ee7a0; font-weight: 700; }
+.fragment { color: #c084fc; font-weight: 700; }
 
 .race {
     display: inline-flex;
-
     align-items: center;
-
     gap: 5px;
-
     max-width: 100%;
-
     padding: 5px 8px;
-
     border-radius: 7px;
-
-    border:
-        1px solid
-        rgba(139, 92, 246, .16);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(139, 92, 246, .08),
-            rgba(56, 189, 248, .045)
-        );
-
+    border: 1px solid rgba(139, 92, 246, .16);
+    background: linear-gradient(135deg, rgba(139, 92, 246, .08), rgba(56, 189, 248, .045));
     color: #c4b5fd;
-
     font-size: 9.5px;
-
     font-weight: 700;
-
     white-space: nowrap;
 }
 
-.race-version {
-    color: #67e8f9;
-
-    font-size: 8px;
-}
-
-
-/* =========================================
-   EQUIPMENT
-========================================= */
+.race-version { color: #67e8f9; font-size: 8px; }
 
 .equipment {
     display: block;
-
     width: 100%;
-
     overflow: hidden;
-
     text-overflow: ellipsis;
-
     white-space: nowrap;
-
     color: #cbd5e1;
-
     font-size: 10px;
-
     transition: color .15s ease;
 }
-
-tbody tr:hover .equipment {
-    color: #e2e8f0;
-}
-
+tbody tr:hover .equipment { color: #e2e8f0; }
 
 /* =========================================
    YES / NO
@@ -565,48 +325,27 @@ tbody tr:hover .equipment {
 
 .badge {
     display: inline-flex;
-
     align-items: center;
-
     gap: 4px;
-
     padding: 5px 8px;
-
     border-radius: 7px;
-
     font-size: 9px;
-
     font-weight: 800;
-
     white-space: nowrap;
 }
 
 .badge-yes {
     color: #86efac;
-
-    background:
-        rgba(74, 222, 128, .07);
-
-    border:
-        1px solid
-        rgba(74, 222, 128, .14);
-
-    box-shadow:
-        0 0 14px
-        rgba(74, 222, 128, .025);
+    background: rgba(74, 222, 128, .07);
+    border: 1px solid rgba(74, 222, 128, .14);
+    box-shadow: 0 0 14px rgba(74, 222, 128, .025);
 }
 
 .badge-no {
     color: #7d8997;
-
-    background:
-        rgba(100, 116, 139, .05);
-
-    border:
-        1px solid
-        rgba(100, 116, 139, .08);
+    background: rgba(100, 116, 139, .05);
+    border: 1px solid rgba(100, 116, 139, .08);
 }
-
 
 /* =========================================
    DROPDOWN
@@ -614,211 +353,91 @@ tbody tr:hover .equipment {
 
 .dropdown-cell {
     position: relative;
-
     display: inline-block;
-
     max-width: 100%;
 }
 
 .dropdown-btn {
     display: flex;
-
     align-items: center;
-
     justify-content: space-between;
-
     gap: 7px;
-
     min-width: 82px;
-
     padding: 6px 8px;
-
-    border:
-        1px solid
-        rgba(56, 189, 248, .14);
-
+    border: 1px solid rgba(56, 189, 248, .14);
     border-radius: 8px;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(56, 189, 248, .075),
-            rgba(139, 92, 246, .065)
-        );
-
+    background: linear-gradient(135deg, rgba(56, 189, 248, .075), rgba(139, 92, 246, .065));
     color: #7dd3fc;
-
     font-size: 9px;
-
     font-weight: 700;
-
     cursor: default;
-
-    transition:
-        .18s ease;
+    transition: .18s ease;
 }
 
 .dropdown-btn:hover {
-    border-color:
-        rgba(56, 189, 248, .29);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(56, 189, 248, .13),
-            rgba(139, 92, 246, .11)
-        );
-
-    box-shadow:
-        0 0 16px
-        rgba(56, 189, 248, .05);
+    border-color: rgba(56, 189, 248, .29);
+    background: linear-gradient(135deg, rgba(56, 189, 248, .13), rgba(139, 92, 246, .11));
+    box-shadow: 0 0 16px rgba(56, 189, 248, .05);
 }
 
 .dropdown-arrow {
     color: #64748b;
-
     font-size: 7px;
-
-    transition:
-        transform .20s ease;
+    transition: transform .20s ease;
 }
 
-.dropdown-cell:hover
-.dropdown-arrow {
-    transform:
-        rotate(180deg);
-}
-
-
-/* =========================================
-   DROPDOWN MENU
-========================================= */
+.dropdown-cell:hover .dropdown-arrow { transform: rotate(180deg); }
 
 .dropdown-menu {
     position: absolute;
-
     top: calc(100% + 6px);
-
     left: 0;
-
     z-index: 99999;
-
     width: 200px;
-
     max-height: 235px;
-
     overflow-y: auto;
-
     padding: 7px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(15, 23, 42, .98),
-            rgba(9, 14, 26, .98)
-        );
-
-    border:
-        1px solid
-        rgba(56, 189, 248, .18);
-
+    background: linear-gradient(145deg, rgba(15, 23, 42, .98), rgba(9, 14, 26, .98));
+    border: 1px solid rgba(56, 189, 248, .18);
     border-radius: 11px;
-
-    box-shadow:
-        0 20px 45px
-        rgba(0,0,0,.70),
-        0 0 25px
-        rgba(56,189,248,.04);
-
-    backdrop-filter:
-        blur(18px);
-
-    -webkit-backdrop-filter:
-        blur(18px);
-
+    box-shadow: 0 20px 45px rgba(0,0,0,.70), 0 0 25px rgba(56,189,248,.04);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     visibility: hidden;
-
     opacity: 0;
-
     pointer-events: none;
-
-    transform:
-        translateY(-6px)
-        scale(.98);
-
-    transform-origin:
-        top left;
-
-    transition:
-        opacity .18s ease,
-        transform .18s ease,
-        visibility .18s ease;
+    transform: translateY(-6px) scale(.98);
+    transform-origin: top left;
+    transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
 }
-
-/*
-   Cầu nối để rê chuột từ nút
-   xuống menu không bị đóng
-*/
 
 .dropdown-menu::before {
     content: "";
-
     position: absolute;
-
     top: -10px;
-
     left: 0;
-
     width: 100%;
-
     height: 10px;
 }
 
-.dropdown-cell:hover
-.dropdown-menu {
+.dropdown-cell:hover .dropdown-menu {
     visibility: visible;
-
     opacity: 1;
-
     pointer-events: auto;
-
-    transform:
-        translateY(0)
-        scale(1);
+    transform: translateY(0) scale(1);
 }
 
 .dropdown-item {
     padding: 8px 9px;
-
     color: #cbd5e1;
-
     font-size: 10px;
-
-    border-bottom:
-        1px solid
-        rgba(148,163,184,.055);
-
+    border-bottom: 1px solid rgba(148,163,184,.055);
     border-radius: 6px;
-
-    transition:
-        background .15s ease,
-        padding-left .15s ease,
-        color .15s ease;
+    transition: background .15s ease, padding-left .15s ease, color .15s ease;
 }
 
-.dropdown-item:last-child {
-    border-bottom: none;
-}
-
-.dropdown-item:hover {
-    background:
-        rgba(56,189,248,.075);
-
-    color: #7dd3fc;
-
-    padding-left: 13px;
-}
-
+.dropdown-item:last-child { border-bottom: none; }
+.dropdown-item:hover { background: rgba(56,189,248,.075); color: #7dd3fc; padding-left: 13px; }
 
 /* =========================================
    BOTTOM ONLINE / OFFLINE
@@ -826,1574 +445,363 @@ tbody tr:hover .equipment {
 
 .counter {
     position: fixed;
-
     right: 16px;
     bottom: 14px;
-
     z-index: 100000;
-
     display: flex;
-
     align-items: center;
-
     gap: 6px;
-
     padding: 6px;
-
-    border:
-        1px solid
-        rgba(56,189,248,.12);
-
+    border: 1px solid rgba(56,189,248,.12);
     border-radius: 10px;
-
-    background:
-        rgba(10,15,25,.88);
-
-    box-shadow:
-        0 12px 30px
-        rgba(0,0,0,.45);
-
-    backdrop-filter:
-        blur(14px);
-
-    -webkit-backdrop-filter:
-        blur(14px);
+    background: rgba(10,15,25,.88);
+    box-shadow: 0 12px 30px rgba(0,0,0,.45);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
 }
 
 .counter-box {
     display: flex;
-
     align-items: center;
-
     gap: 5px;
-
     padding: 5px 9px;
-
     border-radius: 7px;
-
     font-size: 9px;
-
     font-weight: 800;
 }
 
-.counter-online {
-    color: #86efac;
-
-    background:
-        rgba(74,222,128,.065);
-}
-
-.counter-offline {
-    color: #fca5a5;
-
-    background:
-        rgba(248,113,113,.065);
-}
-
-.counter-dot {
-    width: 6px;
-    height: 6px;
-
-    border-radius: 50%;
-}
-
-.green {
-    background: var(--green);
-
-    box-shadow:
-        0 0 7px
-        rgba(74,222,128,.65);
-}
-
-.red {
-    background: var(--red);
-
-    box-shadow:
-        0 0 6px
-        rgba(248,113,113,.35);
-}
-
+.counter-online { color: #86efac; background: rgba(74,222,128,.065); }
+.counter-offline { color: #fca5a5; background: rgba(248,113,113,.065); }
+.counter-dot { width: 6px; height: 6px; border-radius: 50%; }
+.green { background: var(--green); box-shadow: 0 0 7px rgba(74,222,128,.65); }
+.red { background: var(--red); box-shadow: 0 0 6px rgba(248,113,113,.35); }
 
 /* =========================================
-   SCROLLBAR
+   SCROLLBAR & MISC
 ========================================= */
 
-.table-container::-webkit-scrollbar {
-    height: 7px;
-}
+.table-container::-webkit-scrollbar { height: 7px; }
+.table-container::-webkit-scrollbar-track { background: rgba(7,11,18,.85); }
+.table-container::-webkit-scrollbar-thumb { background: linear-gradient(90deg, #0ea5e9, #8b5cf6); border-radius: 20px; }
+.dropdown-menu::-webkit-scrollbar { width: 5px; }
+.dropdown-menu::-webkit-scrollbar-thumb { background: #334155; border-radius: 20px; }
 
-.table-container::-webkit-scrollbar-track {
-    background: rgba(7,11,18,.85);
-}
-
-.table-container::-webkit-scrollbar-thumb {
-    background:
-        linear-gradient(
-            90deg,
-            #0ea5e9,
-            #8b5cf6
-        );
-
-    border-radius: 20px;
-}
-
-.dropdown-menu::-webkit-scrollbar {
-    width: 5px;
-}
-
-.dropdown-menu::-webkit-scrollbar-thumb {
-    background: #334155;
-
-    border-radius: 20px;
-}
-
-
-/* =========================================
-   EMPTY
-========================================= */
-
-.empty {
-    height: 100px;
-
-    text-align: center;
-
-    color: #64748b !important;
-
-    font-size: 12px !important;
-}
-
-
-/* =========================================
-   MOBILE
-========================================= */
+.empty { height: 100px; text-align: center; color: #64748b !important; font-size: 12px !important; }
 
 @media (max-width: 700px) {
-
-    body {
-        padding:
-            25px 9px 70px;
-    }
-
-    h1 {
-        font-size: 23px;
-
-        letter-spacing: 1px;
-    }
-
-    .subtitle {
-        font-size: 11px;
-    }
-
-    .table-container {
-        border-radius: 13px;
-    }
-
-    table {
-        min-width: 1320px;
-    }
-
-    .counter {
-        right: 8px;
-        bottom: 8px;
-    }
+    body { padding: 25px 9px 70px; }
+    h1 { font-size: 23px; letter-spacing: 1px; }
+    .subtitle { font-size: 11px; }
+    .table-container { border-radius: 13px; }
+    table { min-width: 1320px; }
+    .counter { right: 8px; bottom: 8px; }
 }
 </style>
 </head>
 
 <body>
-
-
 <!-- =========================================
      HEADER
 ========================================= -->
-
 <div class="header">
-
-    <div class="status">
-
-        <span class="status-dot"></span>
-
-        LIVE DATABASE CONNECTED
-
-    </div>
-
-    <h1>
-        ⚡ LIVE ACCOUNT CHECKER ⚡
-    </h1>
-
-    <p class="subtitle">
-        Blox Fruits account tracker • Real-time database
-    </p>
-
+    <div class="status"><span class="status-dot"></span> LIVE DATABASE CONNECTED</div>
+    <h1>⚡ LIVE ACCOUNT CHECKER ⚡</h1>
+    <p class="subtitle">Blox Fruits account tracker • Real-time database</p>
 </div>
-
 
 <!-- =========================================
      TABLE
 ========================================= -->
-
 <div class="table-container">
-
 <table>
-
 <thead>
-
 <tr>
-
-<th>Tên</th>
-<th>Level</th>
-<th>Beli</th>
-<th>Fragment</th>
-<th>Tộc</th>
-<th>Melee</th>
-<th>Fruit</th>
-<th>Sword</th>
-<th>Gun</th>
-<th>Fruit Đồ</th>
-<th>Haki Màu</th>
-<th>Valkyrie</th>
-<th>Mirror</th>
-
+<th>Tên</th><th>Level</th><th>Beli</th><th>Fragment</th><th>Tộc</th>
+<th>Melee</th><th>Fruit</th><th>Sword</th><th>Gun</th>
+<th>Fruit Đồ</th><th>Haki Màu</th><th>Valkyrie</th><th>Mirror</th>
 </tr>
-
 </thead>
-
 <tbody id="accTableBody">
-
-<tr>
-
-<td
-    colspan="13"
-    class="empty"
->
-    ⟳ Đang tải dữ liệu...
-</td>
-
-</tr>
-
+<tr><td colspan="13" class="empty">⟳ Đang tải dữ liệu...</td></tr>
 </tbody>
-
 </table>
-
 </div>
-
 
 <!-- =========================================
      ONLINE OFFLINE COUNTER
 ========================================= -->
-
 <div class="counter">
-
     <div class="counter-box counter-online">
-
-        <span class="counter-dot green"></span>
-
-        Online:
-
-        <span id="onlineCount">
-            0
-        </span>
-
+        <span class="counter-dot green"></span> Online: <span id="onlineCount">0</span>
     </div>
-
     <div class="counter-box counter-offline">
-
-        <span class="counter-dot red"></span>
-
-        Offline:
-
-        <span id="offlineCount">
-            0
-        </span>
-
+        <span class="counter-dot red"></span> Offline: <span id="offlineCount">0</span>
     </div>
-
 </div>
 
-
 <script>
-
 /* ==================================================
    FIREBASE
 ================================================== */
-
-const FIREBASE_URL =
-    "https://blox-tracker-default-rtdb.firebaseio.com";
-
-const ACCOUNTS_URL =
-    FIREBASE_URL + "/accounts";
-
-const STREAM_URL =
-    ACCOUNTS_URL + ".json";
-
+const FIREBASE_URL = "https://blox-tracker-default-rtdb.firebaseio.com";
+const ACCOUNTS_URL = FIREBASE_URL + "/accounts";
+const STREAM_URL = ACCOUNTS_URL + ".json";
 
 /* ==================================================
    ONLINE SETTINGS
 ================================================== */
-
-/*
-   5 phút không có dữ liệu mới
-   => OFFLINE
-*/
-
-const OFFLINE_TIMEOUT =
-    5 * 60 * 1000;
-
-
-/*
-   Lưu thời điểm cuối cùng
-   mỗi account có Firebase update
-*/
-
-const accountActivity = {};
-
-
-/*
-   Dữ liệu hiện tại
-*/
-
+// 5 phút không có dữ liệu mới => OFFLINE
+const OFFLINE_TIMEOUT = 5 * 60 * 1000;
+const accountActivity = {}; // Dùng fallback nếu ko có last_seen
 let accountData = {};
 
-
 /* ==================================================
-   ESCAPE HTML
+   HELPERS
 ================================================== */
-
 function escapeHTML(value) {
-
     return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
+        .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
-
-
-/* ==================================================
-   NUMBER
-================================================== */
 
 function formatNumber(value) {
-
-    if (
-        value === undefined ||
-        value === null ||
-        value === ""
-    ) {
-        return "0";
-    }
-
-    const number =
-        Number(
-            String(value)
-                .replace(/,/g, "")
-                .replace(/[^\d.-]/g, "")
-        );
-
-    if (
-        Number.isNaN(number)
-    ) {
-        return escapeHTML(value);
-    }
-
+    if (value === undefined || value === null || value === "") return "0";
+    const number = Number(String(value).replace(/,/g, "").replace(/[^\d.-]/g, ""));
+    if (Number.isNaN(number)) return escapeHTML(value);
     return number.toLocaleString("en-US");
-
 }
 
-
-/* ==================================================
-   GET FIELD
-================================================== */
-
-function getValue(
-    acc,
-    names,
-    fallback = ""
-) {
-
-    for (
-        const name of names
-    ) {
-
-        if (
-            acc[name] !== undefined &&
-            acc[name] !== null &&
-            acc[name] !== ""
-        ) {
-
+function getValue(acc, names, fallback = "") {
+    for (const name of names) {
+        if (acc[name] !== undefined && acc[name] !== null && acc[name] !== "") {
             return acc[name];
-
         }
-
     }
-
     return fallback;
-
 }
 
-
-/* ==================================================
-   GET ARRAY
-================================================== */
-
-function getArray(
-    acc,
-    names
-) {
-
-    for (
-        const name of names
-    ) {
-
-        const value =
-            acc[name];
-
-        if (
-            Array.isArray(value)
-        ) {
-
-            return value;
-
-        }
-
-        if (
-            value &&
-            typeof value === "object"
-        ) {
-
-            return Object.values(
-                value
-            );
-
-        }
-
+function getArray(acc, names) {
+    for (const name of names) {
+        const value = acc[name];
+        if (Array.isArray(value)) return value;
+        if (value && typeof value === "object") return Object.values(value);
     }
-
     return [];
-
 }
 
-
 /* ==================================================
-   BADGE
+   UI BUILDERS
 ================================================== */
-
 function createBadge(value) {
-
-    const text =
-        String(value ?? "")
-            .trim()
-            .toLowerCase();
-
-    const yes =
-        value === true ||
-        text === "true" ||
-        text === "yes" ||
-        text === "có" ||
-        text === "✔ có";
-
-    if (yes) {
-
-        return `
-            <span
-                class="badge badge-yes"
-            >
-                ✔ Có
-            </span>
-        `;
-
-    }
-
-    return `
-        <span
-            class="badge badge-no"
-        >
-            ✖ Không
-        </span>
-    `;
-
+    const text = String(value ?? "").trim().toLowerCase();
+    const yes = value === true || text === "true" || text === "yes" || text === "có" || text === "✔ có" || text === "✅";
+    if (yes) return `<span class="badge badge-yes">✔ Có</span>`;
+    return `<span class="badge badge-no">✖ Không</span>`;
 }
 
-
-/* ==================================================
-   DROPDOWN
-================================================== */
-
-function createDropdown(
-    icon,
-    title,
-    list
-) {
-
-    if (
-        !list ||
-        list.length === 0
-    ) {
-
-        return `
-            <span
-                style="
-                    color:#64748b;
-                    font-size:9px;
-                "
-            >
-                Không có
-            </span>
-        `;
-
+function createDropdown(icon, title, list) {
+    if (!list || list.length === 0) {
+        return `<span style="color:#64748b; font-size:9px;">Không có</span>`;
     }
-
-
-    const items =
-        list
-            .map(item => {
-
-                return `
-                    <div
-                        class="dropdown-item"
-                    >
-                        ${icon}
-                        ${escapeHTML(item)}
-                    </div>
-                `;
-
-            })
-            .join("");
-
-
+    const items = list.map(item => `<div class="dropdown-item">${icon} ${escapeHTML(item)}</div>`).join("");
     return `
-
-        <div
-            class="dropdown-cell"
-        >
-
-            <div
-                class="dropdown-btn"
-            >
-
-                <span>
-                    ${icon}
-                    ${title}
-                    (${list.length})
-                </span>
-
-                <span
-                    class="dropdown-arrow"
-                >
-                    ▼
-                </span>
-
+        <div class="dropdown-cell">
+            <div class="dropdown-btn">
+                <span>${icon} ${title} (${list.length})</span>
+                <span class="dropdown-arrow">▼</span>
             </div>
-
-            <div
-                class="dropdown-menu"
-            >
-
-                ${items}
-
-            </div>
-
+            <div class="dropdown-menu">${items}</div>
         </div>
-
     `;
-
 }
 
-
 /* ==================================================
-   ONLINE CHECK
+   ONLINE CHECK (ĐÃ FIX SỬ DỤNG LAST_SEEN TỪ DATABASE)
 ================================================== */
-
-function isOnline(
-    accountKey
-) {
-
-    const last =
-        accountActivity[
-            accountKey
-        ];
-
-    if (!last) {
-        return false;
+function isOnline(accountKey, acc) {
+    // Ưu tiên đọc dữ liệu last_seen chuẩn xác từ server Lua gửi lên
+    if (acc && acc.last_seen) {
+        const lastSeenMs = acc.last_seen * 1000; // Đổi os.time (giây) sang mili giây
+        return (Date.now() - lastSeenMs <= OFFLINE_TIMEOUT);
     }
-
-    return (
-        Date.now() - last
-        <= OFFLINE_TIMEOUT
-    );
-
+    // Fallback: nếu account cũ không có last_seen thì xài local timestamp
+    const last = accountActivity[accountKey];
+    if (!last) return false;
+    return (Date.now() - last <= OFFLINE_TIMEOUT);
 }
 
-
-/* ==================================================
-   MARK ONLINE
-================================================== */
-
-function markOnline(
-    accountKey
-) {
-
-    if (!accountKey) {
-        return;
-    }
-
-    accountActivity[
-        accountKey
-    ] = Date.now();
-
+function markOnline(accountKey) {
+    if (!accountKey) return;
+    accountActivity[accountKey] = Date.now();
 }
-
-
-/* ==================================================
-   UPDATE COUNTERS
-================================================== */
 
 function updateCounters() {
-
     let online = 0;
     let offline = 0;
-
-
-    for (
-        const key in accountData
-    ) {
-
-        if (
-            isOnline(key)
-        ) {
-
+    for (const key in accountData) {
+        if (isOnline(key, accountData[key])) {
             online++;
-
         } else {
-
             offline++;
-
         }
-
     }
-
-
-    document.getElementById(
-        "onlineCount"
-    ).textContent = online;
-
-
-    document.getElementById(
-        "offlineCount"
-    ).textContent = offline;
-
+    document.getElementById("onlineCount").textContent = online;
+    document.getElementById("offlineCount").textContent = offline;
 }
-
 
 /* ==================================================
    RENDER
 ================================================== */
-
 function renderAccounts() {
-
-    const tbody =
-        document.getElementById(
-            "accTableBody"
-        );
-
-
+    const tbody = document.getElementById("accTableBody");
     tbody.innerHTML = "";
+    const keys = Object.keys(accountData);
 
-
-    const keys =
-        Object.keys(
-            accountData
-        );
-
-
-    if (
-        keys.length === 0
-    ) {
-
-        tbody.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="13"
-                    class="empty"
-                >
-                    📭 Chưa có tài khoản
-                </td>
-
-            </tr>
-
-        `;
-
+    if (keys.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="13" class="empty">📭 Chưa có tài khoản</td></tr>`;
         updateCounters();
-
         return;
-
     }
 
+    for (const accountKey of keys) {
+        const acc = accountData[accountKey] || {};
+        
+        // Cập nhật trạng thái online chuẩn dựa trên acc data
+        const online = isOnline(accountKey, acc);
 
-    for (
-        const accountKey of keys
-    ) {
-
-        const acc =
-            accountData[
-                accountKey
-            ] || {};
-
-
-        const online =
-            isOnline(
-                accountKey
-            );
-
-
-        /* ===========================
-           NAME
-        ============================ */
-
-        const username =
-            getValue(
-                acc,
-                [
-                    "username",
-                    "Username",
-                    "user",
-                    "name",
-                    "Name"
-                ],
-                accountKey
-            );
-
-
-        /* ===========================
-           LEVEL
-        ============================ */
-
-        const level =
-            getValue(
-                acc,
-                [
-                    "level",
-                    "Level",
-                    "lv",
-                    "Lv"
-                ],
-                0
-            );
-
-
-        /* ===========================
-           BELI
-        ============================ */
-
-        const beli =
-            getValue(
-                acc,
-                [
-                    "beli",
-                    "Beli",
-                    "money",
-                    "Money"
-                ],
-                0
-            );
-
-
-        /* ===========================
-           FRAGMENT
-        ============================ */
-
-        const fragments =
-            getValue(
-                acc,
-                [
-                    "fragments",
-                    "Fragments",
-                    "fragment",
-                    "Fragment"
-                ],
-                0
-            );
-
-
-        /* ===========================
-           RACE
-        ============================ */
-
-        const race =
-            getValue(
-                acc,
-                [
-                    "race",
-                    "Race"
-                ],
-                "Unknown"
-            );
-
-
-        const raceVersion =
-            getValue(
-                acc,
-                [
-                    "raceVersion",
-                    "RaceVersion",
-                    "raceV",
-                    "RaceV",
-                    "raceStage",
-                    "RaceStage",
-                    "vRace"
-                ],
-                ""
-            );
-
+        const username = getValue(acc, ["username", "Username", "user", "name", "Name"], accountKey);
+        const level = getValue(acc, ["level", "Level", "lv", "Lv"], 0);
+        const beli = getValue(acc, ["beli", "Beli", "money", "Money"], 0);
+        const fragments = getValue(acc, ["fragments", "Fragments", "fragment", "Fragment"], 0);
+        const race = getValue(acc, ["race", "Race"], "Unknown");
+        const raceVersion = getValue(acc, ["raceVersion", "RaceVersion", "raceV", "RaceV", "raceStage", "RaceStage", "vRace"], "");
 
         const raceHTML = `
-
-            <span class="race">
-
-                🧬
-
-                ${escapeHTML(
-                    race
-                )}
-
-                ${
-                    raceVersion
-                    ? `
-                        <span
-                            class="race-version"
-                        >
-                            ${escapeHTML(
-                                raceVersion
-                            )}
-                        </span>
-                    `
-                    : ""
-                }
-
+            <span class="race">🧬 ${escapeHTML(race)}
+                ${raceVersion ? `<span class="race-version">${escapeHTML(raceVersion)}</span>` : ""}
             </span>
-
         `;
 
+        const melee = getValue(acc, ["melee", "Melee", "fightingStyle", "FightingStyle"], "Không có");
+        const currentFruit = getValue(acc, ["fruit", "Fruit", "currentFruit", "CurrentFruit", "devilFruit", "DevilFruit"], "Không có");
+        const sword = getValue(acc, ["sword", "Sword", "currentSword", "CurrentSword"], "Không có");
+        const gun = getValue(acc, ["gun", "Gun", "currentGun", "CurrentGun"], "Không có");
 
-        /* ===========================
-           MELEE
-        ============================ */
-
-        const melee =
-            getValue(
-                acc,
-                [
-                    "melee",
-                    "Melee",
-                    "fightingStyle",
-                    "FightingStyle"
-                ],
-                "Không có"
-            );
-
-
-        /* ===========================
-           CURRENT FRUIT
-        ============================ */
-
-        const currentFruit =
-            getValue(
-                acc,
-                [
-                    "fruit",
-                    "Fruit",
-                    "currentFruit",
-                    "CurrentFruit",
-                    "devilFruit",
-                    "DevilFruit"
-                ],
-                "Không có"
-            );
-
-
-        /* ===========================
-           SWORD
-        ============================ */
-
-        const sword =
-            getValue(
-                acc,
-                [
-                    "sword",
-                    "Sword",
-                    "currentSword",
-                    "CurrentSword"
-                ],
-                "Không có"
-            );
-
-
-        /* ===========================
-           GUN
-        ============================ */
-
-        const gun =
-            getValue(
-                acc,
-                [
-                    "gun",
-                    "Gun",
-                    "currentGun",
-                    "CurrentGun"
-                ],
-                "Không có"
-            );
-
-
-        /* ===========================
-           FRUIT INVENTORY
-        ============================ */
-
-        const fruits =
-            getArray(
-                acc,
-                [
-                    "fruits",
-                    "Fruits",
-                    "fruitInventory",
-                    "FruitInventory",
-                    "inventoryFruits",
-                    "InventoryFruits"
-                ]
-            );
-
-
-        /* ===========================
-           HAKI
-        ============================ */
-
-        const haki =
-            getArray(
-                acc,
-                [
-                    "hakiColors",
-                    "HakiColors",
-                    "haki",
-                    "Haki",
-                    "colors",
-                    "Colors"
-                ]
-            );
-
-
-        /* ===========================
-           VALKYRIE
-        ============================ */
-
-        const valkyrie =
-            getValue(
-                acc,
-                [
-                    "valkyrie",
-                    "Valkyrie",
-                    "valk",
-                    "Valk"
-                ],
-                false
-            );
-
-
-        /* ===========================
-           MIRROR
-        ============================ */
-
-        const mirror =
-            getValue(
-                acc,
-                [
-                    "mirror",
-                    "Mirror"
-                ],
-                false
-            );
-
-
-        /* ===========================
-           ROW
-        ============================ */
+        // FIX: Thêm "red_fruits" và "haki_colors" để khớp với code Lua gửi lên
+        const fruits = getArray(acc, ["red_fruits", "fruits", "Fruits", "fruitInventory", "InventoryFruits"]);
+        const haki = getArray(acc, ["haki_colors", "hakiColors", "HakiColors", "haki", "Haki", "colors", "Colors"]);
+        
+        const valkyrie = getValue(acc, ["valkyrie", "Valkyrie", "valk", "Valk"], false);
+        const mirror = getValue(acc, ["mirror", "Mirror"], false);
 
         const row = `
-
             <tr>
-
                 <td>
-
-                    <div
-                        class="username-box"
-                    >
-
-                        <span
-                            class="
-                                account-dot
-                                ${
-                                    online
-                                    ? "account-online"
-                                    : "account-offline"
-                                }
-                            "
-                        ></span>
-
-                        <span
-                            class="username"
-                            title="${escapeHTML(
-                                username
-                            )}"
-                        >
-                            ${escapeHTML(
-                                username
-                            )}
-                        </span>
-
+                    <div class="username-box">
+                        <span class="account-dot ${online ? "account-online" : "account-offline"}"></span>
+                        <span class="username" title="${escapeHTML(username)}">${escapeHTML(username)}</span>
                     </div>
-
                 </td>
-
-
-                <td>
-
-                    <span
-                        class="level"
-                    >
-                        ⭐
-                        ${formatNumber(
-                            level
-                        )}
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <span
-                        class="beli"
-                    >
-                        💰
-                        ${formatNumber(
-                            beli
-                        )}
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <span
-                        class="fragment"
-                    >
-                        💎
-                        ${formatNumber(
-                            fragments
-                        )}
-                    </span>
-
-                </td>
-
-
-                <td>
-                    ${raceHTML}
-                </td>
-
-
-                <td>
-
-                    <span
-                        class="equipment"
-                        title="${escapeHTML(
-                            melee
-                        )}"
-                    >
-                        ${escapeHTML(
-                            melee
-                        )}
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <span
-                        class="equipment"
-                        title="${escapeHTML(
-                            currentFruit
-                        )}"
-                    >
-                        ${escapeHTML(
-                            currentFruit
-                        )}
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <span
-                        class="equipment"
-                        title="${escapeHTML(
-                            sword
-                        )}"
-                    >
-                        ${escapeHTML(
-                            sword
-                        )}
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    <span
-                        class="equipment"
-                        title="${escapeHTML(
-                            gun
-                        )}"
-                    >
-                        ${escapeHTML(
-                            gun
-                        )}
-                    </span>
-
-                </td>
-
-
-                <td>
-
-                    ${createDropdown(
-                        "🍎",
-                        "Fruit",
-                        fruits
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${createDropdown(
-                        "🎨",
-                        "Haki",
-                        haki
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${createBadge(
-                        valkyrie
-                    )}
-
-                </td>
-
-
-                <td>
-
-                    ${createBadge(
-                        mirror
-                    )}
-
-                </td>
-
+                <td><span class="level">⭐ ${formatNumber(level)}</span></td>
+                <td><span class="beli">💰 ${formatNumber(beli)}</span></td>
+                <td><span class="fragment">💎 ${formatNumber(fragments)}</span></td>
+                <td>${raceHTML}</td>
+                <td><span class="equipment" title="${escapeHTML(melee)}">${escapeHTML(melee)}</span></td>
+                <td><span class="equipment" title="${escapeHTML(currentFruit)}">${escapeHTML(currentFruit)}</span></td>
+                <td><span class="equipment" title="${escapeHTML(sword)}">${escapeHTML(sword)}</span></td>
+                <td><span class="equipment" title="${escapeHTML(gun)}">${escapeHTML(gun)}</span></td>
+                <td>${createDropdown("🍎", "Fruit", fruits)}</td>
+                <td>${createDropdown("🎨", "Haki", haki)}</td>
+                <td>${createBadge(valkyrie)}</td>
+                <td>${createBadge(mirror)}</td>
             </tr>
-
         `;
-
-
-        tbody.insertAdjacentHTML(
-            "beforeend",
-            row
-        );
-
+        tbody.insertAdjacentHTML("beforeend", row);
     }
-
-
     updateCounters();
-
 }
-
 
 /* ==================================================
    FETCH INITIAL DATA
 ================================================== */
-
 async function fetchAccounts() {
-
     try {
-
-        const response =
-            await fetch(
-                ACCOUNTS_URL +
-                ".json"
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Firebase HTTP " +
-                response.status
-            );
-
-        }
-
-
-        const data =
-            await response.json();
-
-
-        accountData =
-            data || {};
-
-
-        /*
-           Lần đầu web thấy account:
-           coi là online để tránh tất cả
-           hiện offline ngay khi mới mở.
-        */
-
-        for (
-            const key in accountData
-        ) {
-
-            if (
-                accountActivity[
-                    key
-                ] === undefined
-            ) {
-
-                markOnline(
-                    key
-                );
-
-            }
-
-        }
-
-
+        const response = await fetch(ACCOUNTS_URL + ".json");
+        if (!response.ok) throw new Error("Firebase HTTP " + response.status);
+        const data = await response.json();
+        accountData = data || {};
+        
+        // Đã xóa hàm markOnline(key) ở đây để fix lỗi auto online khi load trang
+        
         renderAccounts();
-
+    } catch (error) {
+        console.error("Firebase Error:", error);
+        document.getElementById("accTableBody").innerHTML = `<tr><td colspan="13" class="empty">⚠️ Không thể tải dữ liệu Firebase</td></tr>`;
     }
-
-    catch (error) {
-
-        console.error(
-            "Firebase Error:",
-            error
-        );
-
-        const tbody =
-            document.getElementById(
-                "accTableBody"
-            );
-
-        tbody.innerHTML = `
-
-            <tr>
-
-                <td
-                    colspan="13"
-                    class="empty"
-                >
-                    ⚠️ Không thể tải dữ liệu Firebase
-                </td>
-
-            </tr>
-
-        `;
-
-    }
-
 }
-
 
 /* ==================================================
    FIREBASE REALTIME STREAM
 ================================================== */
-
 function startFirebaseStream() {
-
-    if (
-        typeof EventSource ===
-        "undefined"
-    ) {
-
-        console.warn(
-            "EventSource không được hỗ trợ."
-        );
-
+    if (typeof EventSource === "undefined") {
+        console.warn("EventSource không được hỗ trợ.");
         return;
-
     }
-
-
-    const source =
-        new EventSource(
-            STREAM_URL
-        );
-
-
-    source.onmessage =
-        function(event) {
-
-            try {
-
-                const payload =
-                    JSON.parse(
-                        event.data
-                    );
-
-
-                const path =
-                    payload.path ||
-                    "/";
-
-
-                const data =
-                    payload.data;
-
-
-                /* =========================
-                   ROOT SNAPSHOT
-                ========================= */
-
-                if (
-                    path === "/"
-                ) {
-
-                    accountData =
-                        data || {};
-
-
-                    for (
-                        const key in accountData
-                    ) {
-
-                        markOnline(
-                            key
-                        );
-
-                    }
-
-
-                    renderAccounts();
-
-                    return;
-
-                }
-
-
-                /* =========================
-                   ACCOUNT KEY
-                ========================= */
-
-                const parts =
-                    path
-                        .replace(/^\/+/, "")
-                        .split("/");
-
-
-                const accountKey =
-                    parts[0];
-
-
-                if (
-                    !accountKey
-                ) {
-
-                    return;
-
-                }
-
-
-                /*
-                   Account vừa có Firebase event
-                   => Online
-                */
-
-                markOnline(
-                    accountKey
-                );
-
-
-                /* =========================
-                   UPDATE ACCOUNT
-                ========================= */
-
-                if (
-                    parts.length === 1
-                ) {
-
-                    if (
-                        data === null
-                    ) {
-
-                        delete accountData[
-                            accountKey
-                        ];
-
-                        delete accountActivity[
-                            accountKey
-                        ];
-
-                    } else {
-
-                        accountData[
-                            accountKey
-                        ] = data;
-
-                    }
-
-                }
-
-                else {
-
-                    if (
-                        !accountData[
-                            accountKey
-                        ] ||
-                        typeof accountData[
-                            accountKey
-                        ] !== "object"
-                    ) {
-
-                        accountData[
-                            accountKey
-                        ] = {};
-
-                    }
-
-
-                    let target =
-                        accountData[
-                            accountKey
-                        ];
-
-
-                    for (
-                        let i = 1;
-                        i < parts.length - 1;
-                        i++
-                    ) {
-
-                        const key =
-                            parts[i];
-
-
-                        if (
-                            !target[key] ||
-                            typeof target[key] !==
-                            "object"
-                        ) {
-
-                            target[key] = {};
-
-                        }
-
-
-                        target =
-                            target[key];
-
-                    }
-
-
-                    const finalKey =
-                        parts[
-                            parts.length - 1
-                        ];
-
-
-                    target[
-                        finalKey
-                    ] = data;
-
-                }
-
-
+    const source = new EventSource(STREAM_URL);
+    
+    source.onmessage = function(event) {
+        try {
+            const payload = JSON.parse(event.data);
+            const path = payload.path || "/";
+            const data = payload.data;
+
+            if (path === "/") {
+                accountData = data || {};
                 renderAccounts();
-
+                return;
             }
 
-            catch (error) {
+            const parts = path.replace(/^\/+/, "").split("/");
+            const accountKey = parts[0];
+            if (!accountKey) return;
 
-                console.error(
-                    "Stream Error:",
-                    error
-                );
+            // Đánh dấu online ngay lúc stream nhận được sự kiện (có thay đổi từ server)
+            markOnline(accountKey);
 
+            if (parts.length === 1) {
+                if (data === null) {
+                    delete accountData[accountKey];
+                    delete accountActivity[accountKey];
+                } else {
+                    accountData[accountKey] = data;
+                }
+            } else {
+                if (!accountData[accountKey] || typeof accountData[accountKey] !== "object") accountData[accountKey] = {};
+                let target = accountData[accountKey];
+                for (let i = 1; i < parts.length - 1; i++) {
+                    const key = parts[i];
+                    if (!target[key] || typeof target[key] !== "object") target[key] = {};
+                    target = target[key];
+                }
+                const finalKey = parts[parts.length - 1];
+                target[finalKey] = data;
             }
-
-        };
-
-
-    source.onerror =
-        function() {
-
-            /*
-               EventSource tự kết nối lại.
-            */
-
-            console.warn(
-                "Firebase đang reconnect..."
-            );
-
-        };
-
+            renderAccounts();
+        } catch (error) {
+            console.error("Stream Error:", error);
+        }
+    };
+    source.onerror = function() { console.warn("Firebase đang reconnect..."); };
 }
 
-
 /* ==================================================
-   CHECK OFFLINE
-   Mỗi 10 giây
+   CHECK OFFLINE & INTERVALS
 ================================================== */
-
-setInterval(
-    function() {
-
-        renderAccounts();
-
-    },
-    10000
-);
-
-
-/* ==================================================
-   INITIAL
-================================================== */
-
+setInterval(renderAccounts, 10000); // Check lại trạng thái mỗi 10s
 fetchAccounts();
-
-
-/* ==================================================
-   REALTIME
-================================================== */
-
 startFirebaseStream();
-
-
-/* ==================================================
-   FALLBACK FETCH
-   Mỗi 5 giây
-================================================== */
-
-setInterval(
-    fetchAccounts,
-    5000
-);
-
+setInterval(fetchAccounts, 5000);
 </script>
 
 </body>
